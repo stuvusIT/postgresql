@@ -1,0 +1,29 @@
+galaxy_info:
+  author: Janne Heß
+  description: Set up a PostgreSQL server
+  company: stuvus (http://stuvus.uni-stuttgart.de)
+
+  license: CC-BY-SA
+
+  min_ansible_version: 2.0
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - yakkety
+  - name: Debian
+    versions:
+    - wheezy
+  - name: ArchLinux
+    versions:
+    - all
+    - any
+
+  galaxy_tags:
+    - postgres
+    - postgresql
+    - psql
+    - database
+    - server
+
+dependencies: []

@@ -1,0 +1,55 @@
+---
+- name: Install pacman packages
+  pacman:
+    name: "{{ item }}"
+  with_items:
+    - postgresql
+    - postgresql-docs
+    - postgresql-old-upgrade
+    - python2-psycopg2
+  when: ansible_pkg_mgr == "pacman"
+
+- name: Install apt packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - postgresql
+    - postgresql-client
+    - postgresql-doc
+    - python-psycopg2
+  when: ansible_pkg_mgr == "apt"
+
+- name: Ensure Postgres group exists
+  group:
+    name: "{{ postgres_group }}"
+    gid: 88
+    system: true
+
+- name: Ensure Postgres user exists
+  user:
+    name: "{{ postgres_user }}"
+    group: "{{postgres_group }}"
+    uid: 88
+    shell: /bin/false
+    home: "{{ data_directory }}"
+    comment: "PostgreSQL user"
+    createhome: false
+
+- name: Create configuration directory
+  file:
+    path: "{{ conf_directory }}"
+    state: directory
+    mode: 0750
+    owner: root
+    group: postgres
+
+- name: Create directoreies
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0700
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+  with_items:
+    - "{{ data_directory }}"
+    - "{{ log_directory }}"

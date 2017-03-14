@@ -1,0 +1,39 @@
+# {{ ansible_managed }}
+[Unit]
+Description=PostgreSQL database server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/pg_ctl -s -D {{ data_directory }} start -w -t 120
+ExecReload=/usr/bin/pg_ctl -s -D {{ data_directory }} reload
+ExecStop=/usr/bin/pg_ctl -s -D {{ data_directory }} stop -m fast
+PIDFile=/run/postgres/postmaster.pid
+SyslogIdentifier=postgres
+# Security
+User={{ postgres_user }}
+Group={{ postgres_group }}
+UMask=0077
+CapabilityBoundingSet=
+NoNewPrivileges=true
+InaccessiblePaths=-/home -/root
+ReadOnlyPaths={{ conf_directory }}
+ReadWritePaths={{ data_directory }} {{ run_directory }}
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+# Resource configuration
+OOMScoreAdjust=-200
+# Watchdog
+Restart=always
+TimeoutSec=120
+# Runtime directory
+RuntimeDirectory=postgres
+RuntimeDirectoryMode=0755
+
+[Install]
+WantedBy=multi-user.target
+
+# vi: ft=systemd:

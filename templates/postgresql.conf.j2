@@ -1,0 +1,387 @@
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+
+# {{ ansible_managed }}
+
+#------------------------------------------------------------------------------
+# FILE LOCATIONS
+#------------------------------------------------------------------------------
+
+data_directory    = '{{ data_directory }}'
+hba_file          = '{{ hba_file }}'
+ident_file        = '{{ ident_file }}'
+external_pid_file = '{{ external_pid_file }}'
+
+#------------------------------------------------------------------------------
+# CONNECTIONS AND AUTHENTICATION
+#------------------------------------------------------------------------------
+
+# - Connection Settings -
+
+listen_addresses               = '{{ listen_addresses | join(',') }}'
+port                           = {{ port }}
+max_connections                = {{ max_connections }}
+superuser_reserved_connections = {{ superuser_reserved_connections }}
+unix_socket_directories        = '{{ unix_socket_directories }}'
+unix_socket_group              = '{{ unix_socket_group }}'
+unix_socket_permissions        = {{ unix_socket_permissions }}
+bonjour                        = {{ bonjour | lower }}
+bonjour_name                   = '{{ bonjour_name }}'
+
+# - Security and Authentication -
+
+authentication_timeout    = {{ authentication_timeout }}
+ssl                       = {{ ssl | lower }}
+ssl_ciphers               = '{{ ssl_ciphers }}'
+ssl_prefer_server_ciphers = {{ ssl_prefer_server_ciphers | lower }}
+ssl_ecdh_curve            = '{{ ssl_ecdh_curve }}'
+ssl_cert_file             = '{{ ssl_cert_file }}'
+ssl_key_file              = '{{ ssl_key_file }}'
+ssl_ca_file               = '{{ ssl_ca_file }}'
+ssl_crl_file              = '{{ ssl_crl_file }}'
+password_encryption       = {{ password_encryption | lower }}
+db_user_namespace         = {{ db_user_namespace | lower }}
+row_security              = {{ row_security | lower }}
+{% if krb_server_keyfile != "" %}
+
+# GSSAPI using kerberos
+krb_server_keyfile        = '{{ krb_server_keyfile }}'
+krb_caseins_users         = {{ krb_caseins_users | lower }}
+{% endif %}
+
+# - TCP Keepalives -
+# see "man 7 tcp" for details
+
+tcp_keepalives_idle       = {{ tcp_keepalives_idle }}
+tcp_keepalives_interval   = {{ tcp_keepalives_interval }}
+tcp_keepalives_count      = {{ tcp_keepalives_count }}
+
+#------------------------------------------------------------------------------
+# RESOURCE USAGE (except WAL)
+#------------------------------------------------------------------------------
+
+# - Memory -
+shared_buffers                  = {{ shared_buffers }}
+huge_pages                      = {{ huge_pages }}
+temp_buffers                    = {{ temp_buffers }}
+max_prepared_transactions       = {{ max_prepared_transactions }}
+work_mem                        = {{ work_mem }}
+maintenance_work_mem            = {{ maintenance_work_mem }}
+replacement_sort_tuples         = {{ replacement_sort_tuples }}
+autovacuum_work_mem             = {{ autovacuum_work_mem }}
+max_stack_depth                 = {{ max_stack_depth }}
+dynamic_shared_memory_type      = {{ dynamic_shared_memory_type }}
+
+# - Disk -
+
+temp_file_limit                 = {{ temp_file_limit }}
+
+# - Kernel Resource Usage -
+
+max_files_per_process           = {{ max_files_per_prcess }}
+shared_preload_libraries        = '{{ shared_preload_libraries }}'
+
+# - Cost-Based Vacuum Delay -
+
+vacuum_cost_delay               = {{ vacuum_cost_delay }}
+vacuum_cost_page_hit            = {{ vacuum_cost_page_hit }}
+vacuum_cost_page_miss           = {{ vacuum_cost_page_miss }}
+vacuum_cost_page_dirty          = {{ vacuum_cost_page_dirty }}
+vacuum_cost_limit               = {{ vacuum_cost_limit }}
+
+# - Background Writer -
+
+bgwriter_delay                  = {{ bgwriter_delay }}
+bgwriter_lru_maxpages           = {{ bgwriter_lru_maxpages }}
+bgwriter_lru_multiplier         = {{ bgwriter_lru_multiplier }}
+bgwriter_flush_after            = {{ bgwriter_flush_after }}
+
+# - Asynchronous Behavior -
+effective_io_concurrency        = {{ effective_io_concurrency }}
+max_worker_processes            = {{ max_worker_processes }}
+max_parallel_workers_per_gather = {{ max_parallel_workers_per_gather }}
+old_snapshot_threshold          = {{ old_snapshot_threshold }}
+backend_flush_after             = {{ backend_flush_after }}
+
+#------------------------------------------------------------------------------
+# WRITE AHEAD LOG
+#------------------------------------------------------------------------------
+
+# - Settings -
+
+wal_level                    = {{ wal_level }}
+fsync                        = {{ fsync | lower }}
+synchronous_commit           = {{ synchronous_commit }}
+wal_sync_method              = {{ wal_sync_method }}
+full_page_writes             = {{ full_page_writes | lower }}
+wal_compression              = {{ wal_compression | lower }}
+wal_log_hints                = {{ wal_log_hints | lower}}
+wal_buffers                  = {{ wal_buffers }}
+wal_writer_delay             = {{ wal_writer_delay }}
+wal_writer_flush_after       = {{ wal_writer_flush_after }}
+commit_delay                 = {{ commit_delay }}
+commit_siblings              = {{ commit_siblings }}
+
+# - Checkpoints -
+
+checkpoint_timeout           = {{ checkpoint_timeout }}
+max_wal_size                 = {{ max_wal_size }}
+min_wal_size                 = {{ min_wal_size }}
+checkpoint_completion_target = {{ checkpoint_completion_target }}
+checkpoint_flush_after       = {{ checkpoint_flush_after }}
+checkpoint_warning           = {{ checkpoint_warning }}
+
+# - Archiving -
+
+archive_mode                 = {{ archive_mode }}
+archive_command              = '{{ archive_command }}'
+archive_timeout              = {{ archive_timeout }}
+
+#------------------------------------------------------------------------------
+# REPLICATION
+#------------------------------------------------------------------------------
+
+# - Sending Server(s) -
+
+max_wal_senders              = {{ max_wal_senders }}
+wal_keep_segments            = {{ wal_keep_segments }}
+wal_sender_timeout           = {{ wal_sender_timeout }}
+max_replication_slots        = {{ max_replication_slots }}
+track_commit_timestamp       = {{ track_commit_timestamp | lower }}
+
+# - Master Server -
+
+synchronous_standby_names    = '{{ synchronous_standby_names | join(',') }}'
+vacuum_defer_cleanup_age     = {{ vacuum_defer_cleanup_age }}
+
+# - Standby Servers -
+
+hot_standby                  = {{ hot_standby | lower }}
+max_standby_archive_delay    = {{ max_standby_archive_delay }}
+max_standby_streaming_delay  = {{ max_standby_streaming_delay }}
+wal_receiver_status_interval = {{ wal_receiver_status_interval }}
+hot_standby_feedback         = {{ hot_standby_feedback | lower }}
+wal_receiver_timeout         = {{ wal_receiver_timeout }}
+wal_retrieve_retry_interval  = {{ wal_retrieve_retry_interval }}
+
+#------------------------------------------------------------------------------
+# QUERY TUNING
+#------------------------------------------------------------------------------
+
+# - Planner Method Configuration -
+
+enable_bitmapscan          = {{ enable_bitmapscan | lower }}
+enable_hashagg             = {{ enable_hashagg | lower }}
+enable_hashjoin            = {{ enable_hashjoin | lower }}
+enable_indexscan           = {{ enable_indexscan | lower }}
+enable_indexonlyscan       = {{ enable_indexonlyscan | lower }}
+enable_material            = {{ enable_material | lower }}
+enable_mergejoin           = {{ enable_mergejoin | lower }}
+enable_nestloop            = {{ enable_nestloop | lower }}
+enable_seqscan             = {{ enable_seqscan | lower }}
+enable_sort                = {{ enable_sort | lower }}
+enable_tidscan             = {{ enable_tidscan | lower }}
+
+# - Planner Cost Constants -
+
+seq_page_cost              = {{ seq_page_cost }}
+random_page_cost           = {{ random_page_cost }}
+cpu_tuple_cost             = {{ cpu_tuple_cost }}
+cpu_index_tuple_cost       = {{ cpu_index_tuple_cost }}
+cpu_operator_cost          = {{ cpu_operator_cost }}
+parallel_tuple_cost        = {{ parallel_tuple_cost }}
+parallel_setup_cost        = {{ parallel_setup_cost }}
+min_parallel_relation_size = {{ min_parallel_relation_size }}
+effective_cache_size       = {{ effective_cache_size }}
+
+# - Genetic Query Optimizer -
+
+geqo                       = {{ geqo | lower }}
+geqo_threshold             = {{ geqo_threshold }}
+geqo_effort                = {{ geqo_effort }}
+geqo_pool_size             = {{ geqo_pool_size }}
+geqo_generations           = {{ geqo_generations }}
+geqo_selection_bias        = {{ geqo_selection_bias }}
+geqo_seed                  = {{ geqo_seed }}
+
+# - Other Planner Options -
+
+default_statistics_target  = {{ default_statistics_target }}
+constraint_exclusion       = {{ constraint_exclusion }}
+cursor_tuple_fraction      = {{ cursor_tuple_fraction }}
+from_collapse_limit        = {{ from_collapse_limit }}
+join_collapse_limit        = {{ join_collapse_limit }}
+force_parallel_mode        = {{ force_parallel_mode | lower }}
+
+#------------------------------------------------------------------------------
+# ERROR REPORTING AND LOGGING
+#------------------------------------------------------------------------------
+
+# - Where to Log -
+
+log_destination            = '{{ log_destination | join(',') }}'
+logging_collector          = {{ logging_collector | lower }}
+log_directory              = '{{ log_directory }}'
+log_filename               = '{{ log_filename }}'
+log_file_mode              = {{ log_file_mode }}
+log_truncate_on_rotation   = {{ log_truncate_on_rotation | lower }}
+log_rotation_age           = '{{ log_rotation_age }}'
+log_rotation_size          = '{{ log_rotation_size }}'
+syslog_facility            = '{{ syslog_facility }}'
+syslog_ident               = '{{ syslog_ident }}'
+syslog_sequence_numbers    = {{ syslog_sequence_numbers | lower }}
+syslog_split_messages      = {{ syslog_split_messages | lower }}
+event_source               = '{{ event_source }}'
+
+# - When to Log -
+
+client_min_messages        = {{ client_min_messages }}
+log_min_messages           = {{ log_min_messages }}
+log_min_error_statement    = {{ log_min_error_statement }}
+log_min_duration_statement = {{ log_min_duration_statement }}
+
+# - What to Log -
+
+debug_print_parse          = {{ debug_print_parse | lower }}
+debug_print_rewritten      = {{ debug_print_rewritten | lower }}
+debug_print_plan           = {{ debug_print_plan | lower }}
+debug_pretty_print         = {{ debug_pretty_print | lower }}
+log_checkpoints            = {{ log_checkpoints | lower }}
+log_connections            = {{ log_connections | lower }}
+log_disconnections         = {{ log_disconnections | lower }}
+log_duration               = {{ log_duration | lower }}
+log_error_verbosity        = {{ log_error_verbosity }}
+log_hostname               = {{ log_hostname | lower }}
+log_line_prefix            = '{{ log_line_prefix }}'
+log_lock_waits             = {{ log_lock_waits | lower }}
+log_statement              = '{{ log_statement }}'
+log_replication_commands   = {{ log_replication_commands | lower }}
+log_temp_files             = {{ log_temp_files }}
+log_timezone               = '{{ log_timezone }}'
+
+# - Process Title -
+
+cluster_name               = '{{ cluster_name }}'
+update_process_title       = '{{ update_process_title }}'
+
+#------------------------------------------------------------------------------
+# RUNTIME STATISTICS
+#------------------------------------------------------------------------------
+
+# - Query/Index Statistics Collector -
+
+track_activities          = {{ track_activities | lower }}
+track_counts              = {{ track_counts | lower }}
+track_io_timing           = {{ track_io_timing |lower }}
+track_functions           = {{ track_functions }}
+track_activity_query_size = {{ track_activity_query_size }}
+stats_temp_directory      = '{{ stats_temp_directory }}'
+
+# - Statistics Monitoring -
+
+log_parser_stats          = {{ log_parser_stats | lower }}
+log_planner_stats         = {{ log_planner_stats | lower }}
+log_executor_stats        = {{ log_executor_stats | lower }}
+log_statement_stats       = {{ log_statement_stats | lower }}
+
+#------------------------------------------------------------------------------
+# AUTOVACUUM PARAMETERS
+#------------------------------------------------------------------------------
+
+autovacuum                          = {{ autovacuum | lower }}
+log_autovacuum_min_duration         = {{ log_autovacuum_min_duration }}
+autovacuum_max_workers              = {{ autovacuum_max_workers }}
+autovacuum_naptime                  = {{ autovacuum_naptime }}
+autovacuum_vacuum_threshold         = {{ autovacuum_vacuum_threshold }}
+autovacuum_analyze_threshold        = {{ autovacuum_analyze_threshold }}
+autovacuum_vacuum_scale_factor      = {{ autovacuum_vacuum_scale_factor }}
+autovacuum_analyze_scale_factor     = {{ autovacuum_analyze_scale_factor }}
+autovacuum_freeze_max_age           = {{ autovacuum_freeze_max_age }}
+autovacuum_multixact_freeze_max_age = {{ autovacuum_multixact_freeze_max_age }}
+autovacuum_vacuum_cost_delay        = {{ autovacuum_vacuum_cost_delay }}
+autovacuum_vacuum_cost_limit        = {{ autovacuum_vacuum_cost_limit }}
+
+#------------------------------------------------------------------------------
+# CLIENT CONNECTION DEFAULTS
+#------------------------------------------------------------------------------
+
+# - Statement Behavior -
+
+search_path                         = '{{ search_path }}'
+default_tablespace                  = '{{ default_tablespace }}'
+temp_tablespaces                    = '{{ temp_tablespaces }}'
+check_function_bodies               = {{ check_function_bodies | lower }}
+default_transaction_isolation       = '{{ default_transaction_isolation }}'
+default_transaction_read_only       = {{ default_transaction_read_only | lower }}
+default_transaction_deferrable      = {{ default_transaction_deferrable | lower }}
+session_replication_role            = '{{ session_replication_role }}'
+statement_timeout                   = {{ statement_timeout }}
+lock_timeout                        = {{ lock_timeout }}
+idle_in_transaction_session_timeout = {{ idle_in_transaction_session_timeout }}
+vacuum_freeze_min_age               = {{ vacuum_freeze_min_age }}
+vacuum_freeze_table_age             = {{ vacuum_freeze_table_age }}
+vacuum_multixact_freeze_min_age     = {{ vacuum_multixact_freeze_min_age }}
+vacuum_multixact_freeze_table_age   = {{ vacuum_multixact_freeze_table_age }}
+bytea_output                        = '{{ bytea_output }}'
+xmlbinary                           = '{{ xmlbinary }}'
+xmloption                           = '{{ xmloption }}'
+gin_fuzzy_search_limit              = {{ gin_fuzzy_search_limit }}
+gin_pending_list_limit              = {{ gin_pending_list_limit }}
+
+# - Locale and Formatting -
+
+datestyle                           = '{{ datestyle }}'
+intervalstyle                       = '{{ intervalstyle }}'
+timezone                            = '{{ timezone }}'
+timezone_abbreviations              = '{{ timezone_abbreviations }}'
+extra_float_digits                  = {{ extra_float_digits }}
+client_encoding                     = {{ client_encoding }}
+lc_messages                         = '{{ lc_messages }}'
+lc_monetary                         = '{{ lc_monetary }}'
+lc_numeric                          = '{{ lc_numeric }}'
+lc_time                             = '{{ lc_time }}'
+default_text_search_config          = '{{ default_text_search_config }}'
+
+# - Other Defaults -
+
+dynamic_library_path                = '{{ dynamic_library_path }}'
+local_preload_libraries             = '{{ local_preload_libraries }}'
+session_preload_libraries           = '{{ session_preload_libraries }}'
+
+#------------------------------------------------------------------------------
+# LOCK MANAGEMENT
+#------------------------------------------------------------------------------
+
+deadlock_timeout               = {{ deadlock_timeout }}
+max_locks_per_transaction      = {{ max_locks_per_transaction }}
+max_pred_locks_per_transaction = {{ max_pred_locks_per_transaction }}
+
+#------------------------------------------------------------------------------
+# VERSION/PLATFORM COMPATIBILITY
+#------------------------------------------------------------------------------
+
+# - Previous PostgreSQL Versions -
+
+array_nulls                 = {{ array_nulls | lower }}
+backslash_quote             = {{ backslash_quote }}
+default_with_oids           = {{ default_with_oids | lower }}
+escape_string_warning       = {{ escape_string_warning | lower }}
+lo_compat_privileges        = {{ lo_compat_privileges | lower }}
+operator_precedence_warning = {{ operator_precedence_warning | lower }}
+quote_all_identifiers       = {{ quote_all_identifiers | lower }}
+sql_inheritance             = {{ sql_inheritance | lower }}
+standard_conforming_strings = {{ standard_conforming_strings | lower }}
+synchronize_seqscans        = {{ synchronize_seqscans | lower }}
+
+# - Other Platforms and Clients -
+
+transform_null_equals       = {{ transform_null_equals | lower }}
+
+#------------------------------------------------------------------------------
+# ERROR HANDLING
+#------------------------------------------------------------------------------
+
+exit_on_error       = {{ exit_on_error }}
+restart_after_crash = {{ restart_after_crash }}
+

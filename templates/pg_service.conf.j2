@@ -1,0 +1,14 @@
+# Connection configuration file
+
+# {{ ansible_managed }}
+{% if services is defined %}
+{% for name,fields in services.iteritems() %}
+
+[{{ name }}]
+{% for field,value in fields.iteritems() %}
+{{ field }}={{ value }}
+{% endfor %}
+{% endfor %}
+
+{% endif %}
+# vi:syntax=dosini:

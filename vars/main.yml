@@ -1,0 +1,11 @@
+---
+data_directory: /var/db/postgres
+conf_directory: /etc/postgres
+run_directory: /run/postgres
+log_directory: /var/log/postgres
+
+hba_file: "{{ conf_directory }}/pg_hba.conf"
+ident_file: "{{ conf_directory }}/pg_ident.conf"
+
+external_pid_file: "{{ run_directory }}/postmaster.pid"
+unix_socket_directories: "{{ run_directory }}"

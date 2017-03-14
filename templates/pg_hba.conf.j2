@@ -1,0 +1,10 @@
+# PostgreSQL Client Authentication Configuration File
+# ===================================================
+
+# {{ ansible_managed }}
+
+{% if hbas is defined %}
+{% for hba in hbas %}
+{{ hba.connection_type }} {{ hba.databases | join(',') }} {{ hba.users | join(',') }}{% if hba.connection_type != 'local' %} {{ hba.address }}{% endif %} {{ hba.method }}
+{% endfor %}
+{% endif %}

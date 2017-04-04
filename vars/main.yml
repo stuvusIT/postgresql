@@ -1,5 +1,5 @@
 ---
-data_directory: /var/db/postgres
+data_directory: /var/lib/postgres
 conf_directory: /etc/postgres
 run_directory: /run/postgres
 log_directory: /var/log/postgres

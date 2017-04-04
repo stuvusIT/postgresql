@@ -4,7 +4,7 @@ This role installs and configures a PostgreSQL server.
 It allows to set all configuration variables supported by PostgreSQL.
 
 This role also makes PostgreSQL comply more to the FHS.
-This is accomplished by moving configuration to /etc, logs to /var/log, and the databases to /var/db.
+This is accomplished by moving configuration to /etc, logs to /var/log, and the databases to /var/lib.
 
 ## Requirements
 

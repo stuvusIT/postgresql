@@ -8,7 +8,7 @@ This is accomplished by moving configuration to /etc, logs to /var/log, and the 
 
 ## Requirements
 
-An apt- or pacman-based Linux distribution.
+A dpkg- or pacman-based Linux distribution.
 
 ## Role Variables
 
@@ -32,7 +32,7 @@ None
 
 ## License
 
-CC-BY-SA
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Author Information
 

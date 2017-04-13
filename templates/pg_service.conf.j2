@@ -1,8 +1,8 @@
 # Connection configuration file
 
 # {{ ansible_managed }}
-{% if services is defined %}
-{% for name,fields in services.iteritems() %}
+{% if postgres_services is defined %}
+{% for name,fields in postgres_services.iteritems() %}
 
 [{{ name }}]
 {% for field,value in fields.iteritems() %}

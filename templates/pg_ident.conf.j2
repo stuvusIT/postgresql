@@ -3,8 +3,8 @@
 
 # {{ ansible_managed }}
 
-{% if ident_maps is defined %}
-{% for mapname,ident in ident_maps.iteritems() %}
+{% if postgres_ident_maps is defined %}
+{% for mapname,ident in postgres_ident_maps.iteritems() %}
 {{ mapname }} {{ ident.system_username }} {{ ident.pg_username }}
 {% endfor %}
 {% endif %}

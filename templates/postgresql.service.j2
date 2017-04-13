@@ -5,9 +5,9 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/pg_ctl -s -D {{ data_directory }} start -w -t 120
-ExecReload=/usr/bin/pg_ctl -s -D {{ data_directory }} reload
-ExecStop=/usr/bin/pg_ctl -s -D {{ data_directory }} stop -m fast
+ExecStart=/usr/bin/pg_ctl -s -D {{ postgres_data_directory }} start -w -t 120
+ExecReload=/usr/bin/pg_ctl -s -D {{ postgres_data_directory }} reload
+ExecStop=/usr/bin/pg_ctl -s -D {{ postgres_data_directory }} stop -m fast
 PIDFile=/run/postgres/postmaster.pid
 SyslogIdentifier=postgres
 # Security
@@ -17,8 +17,8 @@ UMask=0077
 CapabilityBoundingSet=
 NoNewPrivileges=true
 InaccessiblePaths=-/home -/root
-ReadOnlyPaths={{ conf_directory }}
-ReadWritePaths={{ data_directory }} {{ run_directory }}
+ReadOnlyPaths={{ postgres_conf_directory }}
+ReadWritePaths={{ postgres_data_directory }} {{ postgres_run_directory }}
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=strict

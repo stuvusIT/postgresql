@@ -31,7 +31,7 @@
     group: "{{postgres_group }}"
     uid: 88
     shell: /bin/false
-    home: "{{ data_directory }}"
+    home: "{{ postgres_data_directory }}"
     comment: "PostgreSQL user"
     createhome: false
 
@@ -51,5 +51,5 @@
     owner: "{{ postgres_user }}"
     group: "{{ postgres_group }}"
   with_items:
-    - "{{ data_directory }}"
-    - "{{ log_directory }}"
+    - "{{ postgres_data_directory }}"
+    - "{{ postgres_log_directory }}"

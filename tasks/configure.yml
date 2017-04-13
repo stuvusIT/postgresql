@@ -2,7 +2,7 @@
 - name: Create main Postgres configuration
   template:
     src: postgresql.conf.j2
-    dest: "{{ conf_directory }}/postgresql.conf"
+    dest: "{{ postgres_conf_directory }}/postgresql.conf"
     owner: root
     group: "{{ postgres_group }}"
     mode: 0640
@@ -10,7 +10,7 @@
 - name: Create host-based auth config
   template:
     src: pg_hba.conf.j2
-    dest: "{{ conf_directory }}/pg_hba.conf"
+    dest: "{{ postgres_conf_directory }}/pg_hba.conf"
     mode: 0640
     owner: root
     group: "{{ postgres_group }}"
@@ -19,7 +19,7 @@
 - name: Create identity-mapping file
   template:
     src: pg_ident.conf.j2
-    dest: "{{ conf_directory }}/pg_ident.conf"
+    dest: "{{ postgres_conf_directory }}/pg_ident.conf"
     mode: 0640
     owner: root
     group: "{{ postgres_group }}"
@@ -42,23 +42,23 @@
     mode: 0755
   with_items:
     - /etc/profile.d/postgresql.sh
-    - "{{ data_directory }}/.profile"
-    - "{{ data_directory }}/.bashrc"
+    - "{{ postgres_data_directory }}/.profile"
+    - "{{ postgres_data_directory }}/.bashrc"
 
 - name: Stat Postgres version
   stat:
-    path: "{{ data_directory }}/PG_VERSION"
+    path: "{{ postgres_data_directory }}/PG_VERSION"
   register: postgres_version
 
 # Using sudo because become_user may be overridden
 - name: Initialize database
-  command: sudo -Hu {{ postgres_user }} initdb --locale {{ locale }} -E {{ encoding }} -D {{ data_directory }}
+  command: sudo -Hu {{ postgres_user }} initdb --locale {{ postgres_locale }} -E {{ postgres_encoding }} -D {{ postgres_data_directory }}
   when: not postgres_version.stat.exists
 
 - name: Include Postgres config
   template:
     src: postgresql_include.conf.j2
-    dest: "{{ data_directory }}/postgresql.conf"
+    dest: "{{ postgres_data_directory }}/postgresql.conf"
     mode: 0640
     owner: root
     group: "{{ postgres_group }}"

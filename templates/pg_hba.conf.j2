@@ -3,8 +3,8 @@
 
 # {{ ansible_managed }}
 
-{% if hbas is defined %}
-{% for hba in hbas %}
+{% if postgres_hbas is defined %}
+{% for hba in postgres_hbas %}
 {{ hba.connection_type }} {{ hba.databases | join(',') }} {{ hba.users | join(',') }}{% if hba.connection_type != 'local' %} {{ hba.address }}{% endif %} {{ hba.method }}
 {% endfor %}
 {% endif %}

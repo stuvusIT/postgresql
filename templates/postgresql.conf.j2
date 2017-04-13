@@ -8,10 +8,10 @@
 # FILE LOCATIONS
 #------------------------------------------------------------------------------
 
-data_directory    = '{{ data_directory }}'
-hba_file          = '{{ hba_file }}'
-ident_file        = '{{ ident_file }}'
-external_pid_file = '{{ external_pid_file }}'
+data_directory    = '{{ postgres_data_directory }}'
+hba_file          = '{{ postgres_hba_file }}'
+ident_file        = '{{ postgres_ident_file }}'
+external_pid_file = '{{ postgres_external_pid_file }}'
 
 #------------------------------------------------------------------------------
 # CONNECTIONS AND AUTHENTICATION
@@ -19,90 +19,90 @@ external_pid_file = '{{ external_pid_file }}'
 
 # - Connection Settings -
 
-listen_addresses               = '{{ listen_addresses | join(',') }}'
-port                           = {{ port }}
-max_connections                = {{ max_connections }}
-superuser_reserved_connections = {{ superuser_reserved_connections }}
-unix_socket_directories        = '{{ unix_socket_directories }}'
-unix_socket_group              = '{{ unix_socket_group }}'
-unix_socket_permissions        = {{ unix_socket_permissions }}
-bonjour                        = {{ bonjour | lower }}
-bonjour_name                   = '{{ bonjour_name }}'
+listen_addresses               = '{{ postgres_listen_addresses | join(',') }}'
+port                           = {{ postgres_port }}
+max_connections                = {{ postgres_max_connections }}
+superuser_reserved_connections = {{ postgres_superuser_reserved_connections }}
+unix_socket_directories        = '{{ postgres_unix_socket_directories }}'
+unix_socket_group              = '{{ postgres_unix_socket_group }}'
+unix_socket_permissions        = {{ postgres_unix_socket_permissions }}
+bonjour                        = {{ postgres_bonjour | lower }}
+bonjour_name                   = '{{ postgres_bonjour_name }}'
 
 # - Security and Authentication -
 
-authentication_timeout    = {{ authentication_timeout }}
-ssl                       = {{ ssl | lower }}
-ssl_ciphers               = '{{ ssl_ciphers }}'
-ssl_prefer_server_ciphers = {{ ssl_prefer_server_ciphers | lower }}
-ssl_ecdh_curve            = '{{ ssl_ecdh_curve }}'
-ssl_cert_file             = '{{ ssl_cert_file }}'
-ssl_key_file              = '{{ ssl_key_file }}'
-ssl_ca_file               = '{{ ssl_ca_file }}'
-ssl_crl_file              = '{{ ssl_crl_file }}'
-password_encryption       = {{ password_encryption | lower }}
-db_user_namespace         = {{ db_user_namespace | lower }}
-row_security              = {{ row_security | lower }}
+authentication_timeout    = {{ postgres_authentication_timeout }}
+ssl                       = {{ postgres_ssl | lower }}
+ssl_ciphers               = '{{ postgres_ssl_ciphers }}'
+ssl_prefer_server_ciphers = {{ postgres_ssl_prefer_server_ciphers | lower }}
+ssl_ecdh_curve            = '{{ postgres_ssl_ecdh_curve }}'
+ssl_cert_file             = '{{ postgres_ssl_cert_file }}'
+ssl_key_file              = '{{ postgres_ssl_key_file }}'
+ssl_ca_file               = '{{ postgres_ssl_ca_file }}'
+ssl_crl_file              = '{{ postgres_ssl_crl_file }}'
+password_encryption       = {{ postgres_password_encryption | lower }}
+db_user_namespace         = {{ postgres_db_user_namespace | lower }}
+row_security              = {{ postgres_row_security | lower }}
 {% if krb_server_keyfile != "" %}
 
 # GSSAPI using kerberos
-krb_server_keyfile        = '{{ krb_server_keyfile }}'
-krb_caseins_users         = {{ krb_caseins_users | lower }}
+krb_server_keyfile        = '{{ postgres_krb_server_keyfile }}'
+krb_caseins_users         = {{ postgres_krb_caseins_users | lower }}
 {% endif %}
 
 # - TCP Keepalives -
 # see "man 7 tcp" for details
 
-tcp_keepalives_idle       = {{ tcp_keepalives_idle }}
-tcp_keepalives_interval   = {{ tcp_keepalives_interval }}
-tcp_keepalives_count      = {{ tcp_keepalives_count }}
+tcp_keepalives_idle       = {{ postgres_tcp_keepalives_idle }}
+tcp_keepalives_interval   = {{ postgres_tcp_keepalives_interval }}
+tcp_keepalives_count      = {{ postgres_tcp_keepalives_count }}
 
 #------------------------------------------------------------------------------
 # RESOURCE USAGE (except WAL)
 #------------------------------------------------------------------------------
 
 # - Memory -
-shared_buffers                  = {{ shared_buffers }}
-huge_pages                      = {{ huge_pages }}
-temp_buffers                    = {{ temp_buffers }}
-max_prepared_transactions       = {{ max_prepared_transactions }}
-work_mem                        = {{ work_mem }}
-maintenance_work_mem            = {{ maintenance_work_mem }}
-replacement_sort_tuples         = {{ replacement_sort_tuples }}
-autovacuum_work_mem             = {{ autovacuum_work_mem }}
-max_stack_depth                 = {{ max_stack_depth }}
-dynamic_shared_memory_type      = {{ dynamic_shared_memory_type }}
+shared_buffers                  = {{ postgres_shared_buffers }}
+huge_pages                      = {{ postgres_huge_pages }}
+temp_buffers                    = {{ postgres_temp_buffers }}
+max_prepared_transactions       = {{ postgres_max_prepared_transactions }}
+work_mem                        = {{ postgres_work_mem }}
+maintenance_work_mem            = {{ postgres_maintenance_work_mem }}
+replacement_sort_tuples         = {{ postgres_replacement_sort_tuples }}
+autovacuum_work_mem             = {{ postgres_autovacuum_work_mem }}
+max_stack_depth                 = {{ postgres_max_stack_depth }}
+dynamic_shared_memory_type      = {{ postgres_dynamic_shared_memory_type }}
 
 # - Disk -
 
-temp_file_limit                 = {{ temp_file_limit }}
+temp_file_limit                 = {{ postgres_temp_file_limit }}
 
 # - Kernel Resource Usage -
 
-max_files_per_process           = {{ max_files_per_prcess }}
-shared_preload_libraries        = '{{ shared_preload_libraries }}'
+max_files_per_process           = {{ postgres_max_files_per_prcess }}
+shared_preload_libraries        = '{{ postgres_shared_preload_libraries }}'
 
 # - Cost-Based Vacuum Delay -
 
-vacuum_cost_delay               = {{ vacuum_cost_delay }}
-vacuum_cost_page_hit            = {{ vacuum_cost_page_hit }}
-vacuum_cost_page_miss           = {{ vacuum_cost_page_miss }}
-vacuum_cost_page_dirty          = {{ vacuum_cost_page_dirty }}
-vacuum_cost_limit               = {{ vacuum_cost_limit }}
+vacuum_cost_delay               = {{ postgres_vacuum_cost_delay }}
+vacuum_cost_page_hit            = {{ postgres_vacuum_cost_page_hit }}
+vacuum_cost_page_miss           = {{ postgres_vacuum_cost_page_miss }}
+vacuum_cost_page_dirty          = {{ postgres_vacuum_cost_page_dirty }}
+vacuum_cost_limit               = {{ postgres_vacuum_cost_limit }}
 
 # - Background Writer -
 
-bgwriter_delay                  = {{ bgwriter_delay }}
-bgwriter_lru_maxpages           = {{ bgwriter_lru_maxpages }}
-bgwriter_lru_multiplier         = {{ bgwriter_lru_multiplier }}
-bgwriter_flush_after            = {{ bgwriter_flush_after }}
+bgwriter_delay                  = {{ postgres_bgwriter_delay }}
+bgwriter_lru_maxpages           = {{ postgres_bgwriter_lru_maxpages }}
+bgwriter_lru_multiplier         = {{ postgres_bgwriter_lru_multiplier }}
+bgwriter_flush_after            = {{ postgres_bgwriter_flush_after }}
 
 # - Asynchronous Behavior -
-effective_io_concurrency        = {{ effective_io_concurrency }}
-max_worker_processes            = {{ max_worker_processes }}
-max_parallel_workers_per_gather = {{ max_parallel_workers_per_gather }}
-old_snapshot_threshold          = {{ old_snapshot_threshold }}
-backend_flush_after             = {{ backend_flush_after }}
+effective_io_concurrency        = {{ postgres_effective_io_concurrency }}
+max_worker_processes            = {{ postgres_max_worker_processes }}
+max_parallel_workers_per_gather = {{ postgres_max_parallel_workers_per_gather }}
+old_snapshot_threshold          = {{ postgres_old_snapshot_threshold }}
+backend_flush_after             = {{ postgres_backend_flush_after }}
 
 #------------------------------------------------------------------------------
 # WRITE AHEAD LOG
@@ -110,33 +110,33 @@ backend_flush_after             = {{ backend_flush_after }}
 
 # - Settings -
 
-wal_level                    = {{ wal_level }}
-fsync                        = {{ fsync | lower }}
-synchronous_commit           = {{ synchronous_commit }}
-wal_sync_method              = {{ wal_sync_method }}
-full_page_writes             = {{ full_page_writes | lower }}
-wal_compression              = {{ wal_compression | lower }}
-wal_log_hints                = {{ wal_log_hints | lower}}
-wal_buffers                  = {{ wal_buffers }}
-wal_writer_delay             = {{ wal_writer_delay }}
-wal_writer_flush_after       = {{ wal_writer_flush_after }}
-commit_delay                 = {{ commit_delay }}
-commit_siblings              = {{ commit_siblings }}
+wal_level                    = {{ postgres_wal_level }}
+fsync                        = {{ postgres_fsync | lower }}
+synchronous_commit           = {{ postgres_synchronous_commit }}
+wal_sync_method              = {{ postgres_wal_sync_method }}
+full_page_writes             = {{ postgres_full_page_writes | lower }}
+wal_compression              = {{ postgres_wal_compression | lower }}
+wal_log_hints                = {{ postgres_wal_log_hints | lower}}
+wal_buffers                  = {{ postgres_wal_buffers }}
+wal_writer_delay             = {{ postgres_wal_writer_delay }}
+wal_writer_flush_after       = {{ postgres_wal_writer_flush_after }}
+commit_delay                 = {{ postgres_commit_delay }}
+commit_siblings              = {{ postgres_commit_siblings }}
 
 # - Checkpoints -
 
-checkpoint_timeout           = {{ checkpoint_timeout }}
-max_wal_size                 = {{ max_wal_size }}
-min_wal_size                 = {{ min_wal_size }}
-checkpoint_completion_target = {{ checkpoint_completion_target }}
-checkpoint_flush_after       = {{ checkpoint_flush_after }}
-checkpoint_warning           = {{ checkpoint_warning }}
+checkpoint_timeout           = {{ postgres_checkpoint_timeout }}
+max_wal_size                 = {{ postgres_max_wal_size }}
+min_wal_size                 = {{ postgres_min_wal_size }}
+checkpoint_completion_target = {{ postgres_checkpoint_completion_target }}
+checkpoint_flush_after       = {{ postgres_checkpoint_flush_after }}
+checkpoint_warning           = {{ postgres_checkpoint_warning }}
 
 # - Archiving -
 
-archive_mode                 = {{ archive_mode }}
-archive_command              = '{{ archive_command }}'
-archive_timeout              = {{ archive_timeout }}
+archive_mode                 = {{ postgres_archive_mode }}
+archive_command              = '{{ postgres_archive_command }}'
+archive_timeout              = {{ postgres_archive_timeout }}
 
 #------------------------------------------------------------------------------
 # REPLICATION
@@ -144,26 +144,26 @@ archive_timeout              = {{ archive_timeout }}
 
 # - Sending Server(s) -
 
-max_wal_senders              = {{ max_wal_senders }}
-wal_keep_segments            = {{ wal_keep_segments }}
-wal_sender_timeout           = {{ wal_sender_timeout }}
-max_replication_slots        = {{ max_replication_slots }}
-track_commit_timestamp       = {{ track_commit_timestamp | lower }}
+max_wal_senders              = {{ postgres_max_wal_senders }}
+wal_keep_segments            = {{ postgres_wal_keep_segments }}
+wal_sender_timeout           = {{ postgres_wal_sender_timeout }}
+max_replication_slots        = {{ postgres_max_replication_slots }}
+track_commit_timestamp       = {{ postgres_track_commit_timestamp | lower }}
 
 # - Master Server -
 
-synchronous_standby_names    = '{{ synchronous_standby_names | join(',') }}'
-vacuum_defer_cleanup_age     = {{ vacuum_defer_cleanup_age }}
+synchronous_standby_names    = '{{ postgres_synchronous_standby_names | join(',') }}'
+vacuum_defer_cleanup_age     = {{ postgres_vacuum_defer_cleanup_age }}
 
 # - Standby Servers -
 
-hot_standby                  = {{ hot_standby | lower }}
-max_standby_archive_delay    = {{ max_standby_archive_delay }}
-max_standby_streaming_delay  = {{ max_standby_streaming_delay }}
-wal_receiver_status_interval = {{ wal_receiver_status_interval }}
-hot_standby_feedback         = {{ hot_standby_feedback | lower }}
-wal_receiver_timeout         = {{ wal_receiver_timeout }}
-wal_retrieve_retry_interval  = {{ wal_retrieve_retry_interval }}
+hot_standby                  = {{ postgres_hot_standby | lower }}
+max_standby_archive_delay    = {{ postgres_max_standby_archive_delay }}
+max_standby_streaming_delay  = {{ postgres_max_standby_streaming_delay }}
+wal_receiver_status_interval = {{ postgres_wal_receiver_status_interval }}
+hot_standby_feedback         = {{ postgres_hot_standby_feedback | lower }}
+wal_receiver_timeout         = {{ postgres_wal_receiver_timeout }}
+wal_retrieve_retry_interval  = {{ postgres_wal_retrieve_retry_interval }}
 
 #------------------------------------------------------------------------------
 # QUERY TUNING
@@ -171,48 +171,48 @@ wal_retrieve_retry_interval  = {{ wal_retrieve_retry_interval }}
 
 # - Planner Method Configuration -
 
-enable_bitmapscan          = {{ enable_bitmapscan | lower }}
-enable_hashagg             = {{ enable_hashagg | lower }}
-enable_hashjoin            = {{ enable_hashjoin | lower }}
-enable_indexscan           = {{ enable_indexscan | lower }}
-enable_indexonlyscan       = {{ enable_indexonlyscan | lower }}
-enable_material            = {{ enable_material | lower }}
-enable_mergejoin           = {{ enable_mergejoin | lower }}
-enable_nestloop            = {{ enable_nestloop | lower }}
-enable_seqscan             = {{ enable_seqscan | lower }}
-enable_sort                = {{ enable_sort | lower }}
-enable_tidscan             = {{ enable_tidscan | lower }}
+enable_bitmapscan          = {{ postgres_enable_bitmapscan | lower }}
+enable_hashagg             = {{ postgres_enable_hashagg | lower }}
+enable_hashjoin            = {{ postgres_enable_hashjoin | lower }}
+enable_indexscan           = {{ postgres_enable_indexscan | lower }}
+enable_indexonlyscan       = {{ postgres_enable_indexonlyscan | lower }}
+enable_material            = {{ postgres_enable_material | lower }}
+enable_mergejoin           = {{ postgres_enable_mergejoin | lower }}
+enable_nestloop            = {{ postgres_enable_nestloop | lower }}
+enable_seqscan             = {{ postgres_enable_seqscan | lower }}
+enable_sort                = {{ postgres_enable_sort | lower }}
+enable_tidscan             = {{ postgres_enable_tidscan | lower }}
 
 # - Planner Cost Constants -
 
-seq_page_cost              = {{ seq_page_cost }}
-random_page_cost           = {{ random_page_cost }}
-cpu_tuple_cost             = {{ cpu_tuple_cost }}
-cpu_index_tuple_cost       = {{ cpu_index_tuple_cost }}
-cpu_operator_cost          = {{ cpu_operator_cost }}
-parallel_tuple_cost        = {{ parallel_tuple_cost }}
-parallel_setup_cost        = {{ parallel_setup_cost }}
-min_parallel_relation_size = {{ min_parallel_relation_size }}
-effective_cache_size       = {{ effective_cache_size }}
+seq_page_cost              = {{ postgres_seq_page_cost }}
+random_page_cost           = {{ postgres_random_page_cost }}
+cpu_tuple_cost             = {{ postgres_cpu_tuple_cost }}
+cpu_index_tuple_cost       = {{ postgres_cpu_index_tuple_cost }}
+cpu_operator_cost          = {{ postgres_cpu_operator_cost }}
+parallel_tuple_cost        = {{ postgres_parallel_tuple_cost }}
+parallel_setup_cost        = {{ postgres_parallel_setup_cost }}
+min_parallel_relation_size = {{ postgres_min_parallel_relation_size }}
+effective_cache_size       = {{ postgres_effective_cache_size }}
 
 # - Genetic Query Optimizer -
 
-geqo                       = {{ geqo | lower }}
-geqo_threshold             = {{ geqo_threshold }}
-geqo_effort                = {{ geqo_effort }}
-geqo_pool_size             = {{ geqo_pool_size }}
-geqo_generations           = {{ geqo_generations }}
-geqo_selection_bias        = {{ geqo_selection_bias }}
-geqo_seed                  = {{ geqo_seed }}
+geqo                       = {{ postgres_geqo | lower }}
+geqo_threshold             = {{ postgres_geqo_threshold }}
+geqo_effort                = {{ postgres_geqo_effort }}
+geqo_pool_size             = {{ postgres_geqo_pool_size }}
+geqo_generations           = {{ postgres_geqo_generations }}
+geqo_selection_bias        = {{ postgres_geqo_selection_bias }}
+geqo_seed                  = {{ postgres_geqo_seed }}
 
 # - Other Planner Options -
 
-default_statistics_target  = {{ default_statistics_target }}
-constraint_exclusion       = {{ constraint_exclusion }}
-cursor_tuple_fraction      = {{ cursor_tuple_fraction }}
-from_collapse_limit        = {{ from_collapse_limit }}
-join_collapse_limit        = {{ join_collapse_limit }}
-force_parallel_mode        = {{ force_parallel_mode | lower }}
+default_statistics_target  = {{ postgres_default_statistics_target }}
+constraint_exclusion       = {{ postgres_constraint_exclusion }}
+cursor_tuple_fraction      = {{ postgres_cursor_tuple_fraction }}
+from_collapse_limit        = {{ postgres_from_collapse_limit }}
+join_collapse_limit        = {{ postgres_join_collapse_limit }}
+force_parallel_mode        = {{ postgres_force_parallel_mode | lower }}
 
 #------------------------------------------------------------------------------
 # ERROR REPORTING AND LOGGING
@@ -220,50 +220,50 @@ force_parallel_mode        = {{ force_parallel_mode | lower }}
 
 # - Where to Log -
 
-log_destination            = '{{ log_destination | join(',') }}'
-logging_collector          = {{ logging_collector | lower }}
-log_directory              = '{{ log_directory }}'
-log_filename               = '{{ log_filename }}'
-log_file_mode              = {{ log_file_mode }}
-log_truncate_on_rotation   = {{ log_truncate_on_rotation | lower }}
-log_rotation_age           = '{{ log_rotation_age }}'
-log_rotation_size          = '{{ log_rotation_size }}'
-syslog_facility            = '{{ syslog_facility }}'
-syslog_ident               = '{{ syslog_ident }}'
-syslog_sequence_numbers    = {{ syslog_sequence_numbers | lower }}
-syslog_split_messages      = {{ syslog_split_messages | lower }}
-event_source               = '{{ event_source }}'
+log_destination            = '{{ postgres_log_destination | join(',') }}'
+logging_collector          = {{ postgres_logging_collector | lower }}
+log_directory              = '{{ postgres_log_directory }}'
+log_filename               = '{{ postgres_log_filename }}'
+log_file_mode              = {{ postgres_log_file_mode }}
+log_truncate_on_rotation   = {{ postgres_log_truncate_on_rotation | lower }}
+log_rotation_age           = '{{ postgres_log_rotation_age }}'
+log_rotation_size          = '{{ postgres_log_rotation_size }}'
+syslog_facility            = '{{ postgres_syslog_facility }}'
+syslog_ident               = '{{ postgres_syslog_ident }}'
+syslog_sequence_numbers    = {{ postgres_syslog_sequence_numbers | lower }}
+syslog_split_messages      = {{ postgres_syslog_split_messages | lower }}
+event_source               = '{{ postgres_event_source }}'
 
 # - When to Log -
 
-client_min_messages        = {{ client_min_messages }}
-log_min_messages           = {{ log_min_messages }}
-log_min_error_statement    = {{ log_min_error_statement }}
-log_min_duration_statement = {{ log_min_duration_statement }}
+client_min_messages        = {{ postgres_client_min_messages }}
+log_min_messages           = {{ postgres_log_min_messages }}
+log_min_error_statement    = {{ postgres_log_min_error_statement }}
+log_min_duration_statement = {{ postgres_log_min_duration_statement }}
 
 # - What to Log -
 
-debug_print_parse          = {{ debug_print_parse | lower }}
-debug_print_rewritten      = {{ debug_print_rewritten | lower }}
-debug_print_plan           = {{ debug_print_plan | lower }}
-debug_pretty_print         = {{ debug_pretty_print | lower }}
-log_checkpoints            = {{ log_checkpoints | lower }}
-log_connections            = {{ log_connections | lower }}
-log_disconnections         = {{ log_disconnections | lower }}
-log_duration               = {{ log_duration | lower }}
-log_error_verbosity        = {{ log_error_verbosity }}
-log_hostname               = {{ log_hostname | lower }}
-log_line_prefix            = '{{ log_line_prefix }}'
-log_lock_waits             = {{ log_lock_waits | lower }}
-log_statement              = '{{ log_statement }}'
-log_replication_commands   = {{ log_replication_commands | lower }}
-log_temp_files             = {{ log_temp_files }}
-log_timezone               = '{{ log_timezone }}'
+debug_print_parse          = {{ postgres_debug_print_parse | lower }}
+debug_print_rewritten      = {{ postgres_debug_print_rewritten | lower }}
+debug_print_plan           = {{ postgres_debug_print_plan | lower }}
+debug_pretty_print         = {{ postgres_debug_pretty_print | lower }}
+log_checkpoints            = {{ postgres_log_checkpoints | lower }}
+log_connections            = {{ postgres_log_connections | lower }}
+log_disconnections         = {{ postgres_log_disconnections | lower }}
+log_duration               = {{ postgres_log_duration | lower }}
+log_error_verbosity        = {{ postgres_log_error_verbosity }}
+log_hostname               = {{ postgres_log_hostname | lower }}
+log_line_prefix            = '{{ postgres_log_line_prefix }}'
+log_lock_waits             = {{ postgres_log_lock_waits | lower }}
+log_statement              = '{{ postgres_log_statement }}'
+log_replication_commands   = {{ postgres_log_replication_commands | lower }}
+log_temp_files             = {{ postgres_log_temp_files }}
+log_timezone               = '{{ postgres_log_timezone }}'
 
 # - Process Title -
 
-cluster_name               = '{{ cluster_name }}'
-update_process_title       = '{{ update_process_title }}'
+cluster_name               = '{{ postgres_cluster_name }}'
+update_process_title       = '{{ postgres_update_process_title }}'
 
 #------------------------------------------------------------------------------
 # RUNTIME STATISTICS
@@ -271,36 +271,36 @@ update_process_title       = '{{ update_process_title }}'
 
 # - Query/Index Statistics Collector -
 
-track_activities          = {{ track_activities | lower }}
-track_counts              = {{ track_counts | lower }}
-track_io_timing           = {{ track_io_timing |lower }}
-track_functions           = {{ track_functions }}
-track_activity_query_size = {{ track_activity_query_size }}
-stats_temp_directory      = '{{ stats_temp_directory }}'
+track_activities          = {{ postgres_track_activities | lower }}
+track_counts              = {{ postgres_track_counts | lower }}
+track_io_timing           = {{ postgres_track_io_timing |lower }}
+track_functions           = {{ postgres_track_functions }}
+track_activity_query_size = {{ postgres_track_activity_query_size }}
+stats_temp_directory      = '{{ postgres_stats_temp_directory }}'
 
 # - Statistics Monitoring -
 
-log_parser_stats          = {{ log_parser_stats | lower }}
-log_planner_stats         = {{ log_planner_stats | lower }}
-log_executor_stats        = {{ log_executor_stats | lower }}
-log_statement_stats       = {{ log_statement_stats | lower }}
+log_parser_stats          = {{ postgres_log_parser_stats | lower }}
+log_planner_stats         = {{ postgres_log_planner_stats | lower }}
+log_executor_stats        = {{ postgres_log_executor_stats | lower }}
+log_statement_stats       = {{ postgres_log_statement_stats | lower }}
 
 #------------------------------------------------------------------------------
 # AUTOVACUUM PARAMETERS
 #------------------------------------------------------------------------------
 
-autovacuum                          = {{ autovacuum | lower }}
-log_autovacuum_min_duration         = {{ log_autovacuum_min_duration }}
-autovacuum_max_workers              = {{ autovacuum_max_workers }}
-autovacuum_naptime                  = {{ autovacuum_naptime }}
-autovacuum_vacuum_threshold         = {{ autovacuum_vacuum_threshold }}
-autovacuum_analyze_threshold        = {{ autovacuum_analyze_threshold }}
-autovacuum_vacuum_scale_factor      = {{ autovacuum_vacuum_scale_factor }}
-autovacuum_analyze_scale_factor     = {{ autovacuum_analyze_scale_factor }}
-autovacuum_freeze_max_age           = {{ autovacuum_freeze_max_age }}
-autovacuum_multixact_freeze_max_age = {{ autovacuum_multixact_freeze_max_age }}
-autovacuum_vacuum_cost_delay        = {{ autovacuum_vacuum_cost_delay }}
-autovacuum_vacuum_cost_limit        = {{ autovacuum_vacuum_cost_limit }}
+autovacuum                          = {{ postgres_autovacuum | lower }}
+log_autovacuum_min_duration         = {{ postgres_log_autovacuum_min_duration }}
+autovacuum_max_workers              = {{ postgres_autovacuum_max_workers }}
+autovacuum_naptime                  = {{ postgres_autovacuum_naptime }}
+autovacuum_vacuum_threshold         = {{ postgres_autovacuum_vacuum_threshold }}
+autovacuum_analyze_threshold        = {{ postgres_autovacuum_analyze_threshold }}
+autovacuum_vacuum_scale_factor      = {{ postgres_autovacuum_vacuum_scale_factor }}
+autovacuum_analyze_scale_factor     = {{ postgres_autovacuum_analyze_scale_factor }}
+autovacuum_freeze_max_age           = {{ postgres_autovacuum_freeze_max_age }}
+autovacuum_multixact_freeze_max_age = {{ postgres_autovacuum_multixact_freeze_max_age }}
+autovacuum_vacuum_cost_delay        = {{ postgres_autovacuum_vacuum_cost_delay }}
+autovacuum_vacuum_cost_limit        = {{ postgres_autovacuum_vacuum_cost_limit }}
 
 #------------------------------------------------------------------------------
 # CLIENT CONNECTION DEFAULTS
@@ -308,54 +308,54 @@ autovacuum_vacuum_cost_limit        = {{ autovacuum_vacuum_cost_limit }}
 
 # - Statement Behavior -
 
-search_path                         = '{{ search_path }}'
-default_tablespace                  = '{{ default_tablespace }}'
-temp_tablespaces                    = '{{ temp_tablespaces }}'
-check_function_bodies               = {{ check_function_bodies | lower }}
-default_transaction_isolation       = '{{ default_transaction_isolation }}'
-default_transaction_read_only       = {{ default_transaction_read_only | lower }}
-default_transaction_deferrable      = {{ default_transaction_deferrable | lower }}
-session_replication_role            = '{{ session_replication_role }}'
-statement_timeout                   = {{ statement_timeout }}
-lock_timeout                        = {{ lock_timeout }}
-idle_in_transaction_session_timeout = {{ idle_in_transaction_session_timeout }}
-vacuum_freeze_min_age               = {{ vacuum_freeze_min_age }}
-vacuum_freeze_table_age             = {{ vacuum_freeze_table_age }}
-vacuum_multixact_freeze_min_age     = {{ vacuum_multixact_freeze_min_age }}
-vacuum_multixact_freeze_table_age   = {{ vacuum_multixact_freeze_table_age }}
-bytea_output                        = '{{ bytea_output }}'
-xmlbinary                           = '{{ xmlbinary }}'
-xmloption                           = '{{ xmloption }}'
-gin_fuzzy_search_limit              = {{ gin_fuzzy_search_limit }}
-gin_pending_list_limit              = {{ gin_pending_list_limit }}
+search_path                         = '{{ postgres_search_path }}'
+default_tablespace                  = '{{ postgres_default_tablespace }}'
+temp_tablespaces                    = '{{ postgres_temp_tablespaces }}'
+check_function_bodies               = {{ postgres_check_function_bodies | lower }}
+default_transaction_isolation       = '{{ postgres_default_transaction_isolation }}'
+default_transaction_read_only       = {{ postgres_default_transaction_read_only | lower }}
+default_transaction_deferrable      = {{ postgres_default_transaction_deferrable | lower }}
+session_replication_role            = '{{ postgres_session_replication_role }}'
+statement_timeout                   = {{ postgres_statement_timeout }}
+lock_timeout                        = {{ postgres_lock_timeout }}
+idle_in_transaction_session_timeout = {{ postgres_idle_in_transaction_session_timeout }}
+vacuum_freeze_min_age               = {{ postgres_vacuum_freeze_min_age }}
+vacuum_freeze_table_age             = {{ postgres_vacuum_freeze_table_age }}
+vacuum_multixact_freeze_min_age     = {{ postgres_vacuum_multixact_freeze_min_age }}
+vacuum_multixact_freeze_table_age   = {{ postgres_vacuum_multixact_freeze_table_age }}
+bytea_output                        = '{{ postgres_bytea_output }}'
+xmlbinary                           = '{{ postgres_xmlbinary }}'
+xmloption                           = '{{ postgres_xmloption }}'
+gin_fuzzy_search_limit              = {{ postgres_gin_fuzzy_search_limit }}
+gin_pending_list_limit              = {{ postgres_gin_pending_list_limit }}
 
 # - Locale and Formatting -
 
-datestyle                           = '{{ datestyle }}'
-intervalstyle                       = '{{ intervalstyle }}'
-timezone                            = '{{ timezone }}'
-timezone_abbreviations              = '{{ timezone_abbreviations }}'
-extra_float_digits                  = {{ extra_float_digits }}
-client_encoding                     = {{ client_encoding }}
-lc_messages                         = '{{ lc_messages }}'
-lc_monetary                         = '{{ lc_monetary }}'
-lc_numeric                          = '{{ lc_numeric }}'
-lc_time                             = '{{ lc_time }}'
-default_text_search_config          = '{{ default_text_search_config }}'
+datestyle                           = '{{ postgres_datestyle }}'
+intervalstyle                       = '{{ postgres_intervalstyle }}'
+timezone                            = '{{ postgres_timezone }}'
+timezone_abbreviations              = '{{ postgres_timezone_abbreviations }}'
+extra_float_digits                  = {{ postgres_extra_float_digits }}
+client_encoding                     = {{ postgres_client_encoding }}
+lc_messages                         = '{{ postgres_lc_messages }}'
+lc_monetary                         = '{{ postgres_lc_monetary }}'
+lc_numeric                          = '{{ postgres_lc_numeric }}'
+lc_time                             = '{{ postgres_lc_time }}'
+default_text_search_config          = '{{ postgres_default_text_search_config }}'
 
 # - Other Defaults -
 
-dynamic_library_path                = '{{ dynamic_library_path }}'
-local_preload_libraries             = '{{ local_preload_libraries }}'
-session_preload_libraries           = '{{ session_preload_libraries }}'
+dynamic_library_path                = '{{ postgres_dynamic_library_path }}'
+local_preload_libraries             = '{{ postgres_local_preload_libraries }}'
+session_preload_libraries           = '{{ postgres_session_preload_libraries }}'
 
 #------------------------------------------------------------------------------
 # LOCK MANAGEMENT
 #------------------------------------------------------------------------------
 
-deadlock_timeout               = {{ deadlock_timeout }}
-max_locks_per_transaction      = {{ max_locks_per_transaction }}
-max_pred_locks_per_transaction = {{ max_pred_locks_per_transaction }}
+deadlock_timeout               = {{ postgres_deadlock_timeout }}
+max_locks_per_transaction      = {{ postgres_max_locks_per_transaction }}
+max_pred_locks_per_transaction = {{ postgres_max_pred_locks_per_transaction }}
 
 #------------------------------------------------------------------------------
 # VERSION/PLATFORM COMPATIBILITY
@@ -363,25 +363,25 @@ max_pred_locks_per_transaction = {{ max_pred_locks_per_transaction }}
 
 # - Previous PostgreSQL Versions -
 
-array_nulls                 = {{ array_nulls | lower }}
-backslash_quote             = {{ backslash_quote }}
-default_with_oids           = {{ default_with_oids | lower }}
-escape_string_warning       = {{ escape_string_warning | lower }}
-lo_compat_privileges        = {{ lo_compat_privileges | lower }}
-operator_precedence_warning = {{ operator_precedence_warning | lower }}
-quote_all_identifiers       = {{ quote_all_identifiers | lower }}
-sql_inheritance             = {{ sql_inheritance | lower }}
-standard_conforming_strings = {{ standard_conforming_strings | lower }}
-synchronize_seqscans        = {{ synchronize_seqscans | lower }}
+array_nulls                 = {{ postgres_array_nulls | lower }}
+backslash_quote             = {{ postgres_backslash_quote }}
+default_with_oids           = {{ postgres_default_with_oids | lower }}
+escape_string_warning       = {{ postgres_escape_string_warning | lower }}
+lo_compat_privileges        = {{ postgres_lo_compat_privileges | lower }}
+operator_precedence_warning = {{ postgres_operator_precedence_warning | lower }}
+quote_all_identifiers       = {{ postgres_quote_all_identifiers | lower }}
+sql_inheritance             = {{ postgres_sql_inheritance | lower }}
+standard_conforming_strings = {{ postgres_standard_conforming_strings | lower }}
+synchronize_seqscans        = {{ postgres_synchronize_seqscans | lower }}
 
 # - Other Platforms and Clients -
 
-transform_null_equals       = {{ transform_null_equals | lower }}
+transform_null_equals       = {{ postgres_transform_null_equals | lower }}
 
 #------------------------------------------------------------------------------
 # ERROR HANDLING
 #------------------------------------------------------------------------------
 
-exit_on_error       = {{ exit_on_error }}
-restart_after_crash = {{ restart_after_crash }}
+exit_on_error       = {{ postgres_exit_on_error }}
+restart_after_crash = {{ postgres_restart_after_crash }}
 

@@ -14,7 +14,7 @@ An apt- or pacman-based Linux distribution.
 
 This role seriously has a ton of variables.
 Instead of copying the defaults file here, look it [up there](defaults/main.yml).
-All variables from postgresql.conf are called exactly like they are called in the file.
+All variables from postgresql.conf are called exactly like they are called in the file but with `postgres_` appended.
 
 ## Dependencies
 

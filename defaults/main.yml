@@ -4,13 +4,13 @@
 ##########
 postgres_user: postgres
 postgres_group: postgres
-locale: C
-encoding: UTF8
+postgres_locale: C
+postgres_encoding: UTF8
 
 ##########
 # pg_hba.conf
 ##########
-hbas:
+postgres_hbas:
   - connection_type: local
     databases: [ "all" ]
     users: [ "all" ]
@@ -29,7 +29,7 @@ hbas:
 ##########
 # pg_ident.conf
 ##########
-#ident_maps:
+#postgres_ident_maps:
 #  testmap:
 #    system_username: root
 #    pg_username: postgres
@@ -37,7 +37,7 @@ hbas:
 ##########
 # pg_service.conf
 ##########
-#services:
+#postgres_services:
 #  postgres:
 #    dbname: postgres
 #    user: postgres
@@ -46,356 +46,356 @@ hbas:
 # postgresql.conf
 ##########
 # Changing requires restart
-unix_socket_group: ''
+postgres_unix_socket_group: ''
 # Changing requires restart
-unix_socket_permissions: 0777
+postgres_unix_socket_permissions: 0777
 # Changing requires restart
-listen_addresses: [ "localhost" ]
+postgres_listen_addresses: [ "localhost" ]
 # Changing requires restart
-port: 5432
+postgres_port: 5432
 # Changing requires restart
-max_connections: 100
+postgres_max_connections: 100
 # Changing requires restart
-superuser_reserved_connections: 3
+postgres_superuser_reserved_connections: 3
 # Changing requires restart
-bonjour: false
+postgres_bonjour: false
 # Changing requires restart
-bonjour_name: "Postgresql"
-authentication_timeout: "1min"
+postgres_bonjour_name: "Postgresql"
+postgres_authentication_timeout: "1min"
 # Changing requires restart
-ssl: false
+postgres_ssl: false
 # Changing requires restart
-ssl_ciphers: "HIGH:MEDIUM:+3DES:!aNULL"
+postgres_ssl_ciphers: "HIGH:MEDIUM:+3DES:!aNULL"
 # Changing requires restart
-ssl_prefer_server_ciphers: true
+postgres_ssl_prefer_server_ciphers: true
 # Changing requires restart
-ssl_ecdh_curve: "prime256v1"
+postgres_ssl_ecdh_curve: "prime256v1"
 # Changing requires restart
-ssl_cert_file: "server.crt"
+postgres_ssl_cert_file: "server.crt"
 # Changing requires restart
-ssl_key_file: "server.key"
+postgres_ssl_key_file: "server.key"
 # Changing requires restart
-ssl_ca_file: ""
+postgres_ssl_ca_file: ""
 # Changing requires restart
-ssl_crl_file: ""
-password_encryption: true
-db_user_namespace: false
-row_security: true
-krb_server_keyfile: ""
-krb_caseins_users: false
+postgres_ssl_crl_file: ""
+postgres_password_encryption: true
+postgres_db_user_namespace: false
+postgres_row_security: true
+postgres_krb_server_keyfile: ""
+postgres_krb_caseins_users: false
 # 0 select system default
-tcp_keepalives_idle: 0
+postgres_tcp_keepalives_idle: 0
 # 0 select system default
-tcp_keepalives_interval: 0
+postgres_tcp_keepalives_interval: 0
 # 0 select system default
-tcp_keepalives_count: 0
+postgres_tcp_keepalives_count: 0
 
 
 # Minimum is 128kB
 # Changing requires restart
-shared_buffers: 32MB
+postgres_shared_buffers: 32MB
 # Must be one of "on", "off", or "try"
 # Changing requires restart
-huge_pages: try
+postgres_huge_pages: try
 # Minimum is 800kB
-temp_buffers: 8MB
+postgres_temp_buffers: 8MB
 # Changing requires restart
-max_prepared_transactions: 0
+postgres_max_prepared_transactions: 0
 # Minimum is 64kB
-work_mem: 4MB
+postgres_work_mem: 4MB
 # Minimum is 1MB
-maintenance_work_mem: 64MB
-replacement_sort_tuples: 150000
+postgres_maintenance_work_mem: 64MB
+postgres_replacement_sort_tuples: 150000
 # Minimum is 1MB; Use -1 to use the same as maintenance_work_mem
-autovacuum_work_mem: -1
+postgres_autovacuum_work_mem: -1
 # Minimum is 100kB
-max_stack_depth: 2MB
-dynamic_shared_memory_type: posix
+postgres_max_stack_depth: 2MB
+postgres_dynamic_shared_memory_type: posix
 # Unit is kB. Or use -1 for no limit
-temp_file_limit: -1
+postgres_temp_file_limit: -1
 # Minimum is 25
 # Changing requires restart
-max_files_per_prcess: 1000
+postgres_max_files_per_prcess: 1000
 # Changing requires restart
-shared_preload_libraries: ""
+postgres_shared_preload_libraries: ""
 # 0-100 milliseconds
-vacuum_cost_delay: 0
+postgres_vacuum_cost_delay: 0
 # 0-10000 credits
-vacuum_cost_page_hit: 1
+postgres_vacuum_cost_page_hit: 1
 # 0-10000 credits
-vacuum_cost_page_miss: 10
+postgres_vacuum_cost_page_miss: 10
 # 0-10000 credits
-vacuum_cost_page_dirty: 20
+postgres_vacuum_cost_page_dirty: 20
 # 0-10000 credits
-vacuum_cost_limit: 20
+postgres_vacuum_cost_limit: 20
 # 10-10000ms between rounds
-bgwriter_delay: 200ms
+postgres_bgwriter_delay: 200ms
 # 0-1000 max buffers written/round
-bgwriter_lru_maxpages: 100
+postgres_bgwriter_lru_maxpages: 100
 # 0-10.0 multiplier on buffers scanned/round
-bgwriter_lru_multiplier: 2.0
+postgres_bgwriter_lru_multiplier: 2.0
 # 0 disables
-bgwriter_flush_after: 512kB
+postgres_bgwriter_flush_after: 512kB
 # 1-1000; 0 disables prefetching
-effective_io_concurrency: 1
+postgres_effective_io_concurrency: 1
 # Changing requires restart
-max_worker_processes: 8
+postgres_max_worker_processes: 8
 # Taken from max_worker_processes
-max_parallel_workers_per_gather: 0
+postgres_max_parallel_workers_per_gather: 0
 # 1min-60d; -1 disables; 0 is immediate
 # Changing requires restart
-old_snapshot_threshold: -1
+postgres_old_snapshot_threshold: -1
 # 0 disables
-backend_flush_after: 0
+postgres_backend_flush_after: 0
 
 
 # minimal, replica, or logical
 # Changing requires restart
-wal_level: minimal
-fsync: true
+postgres_wal_level: minimal
+postgres_fsync: true
 # off, local, remote_write, remote_apply, or on
-synchronous_commit: on
+postgres_synchronous_commit: on
 # open_datasync, fdatasync, fsync, fsync_witethrough, open_sync
-wal_sync_method: fdatasync
-full_page_writes: true
-wal_compression: false
+postgres_wal_sync_method: fdatasync
+postgres_full_page_writes: true
+postgres_wal_compression: false
 # Changing requires restart
-wal_log_hints: false
+postgres_wal_log_hints: false
 # min 32kB, -1 sets based on shared_buffers
 # Changing requires restart
-wal_buffers: -1
+postgres_wal_buffers: -1
 # 1-10000 milliseconds
-wal_writer_delay: 200ms
+postgres_wal_writer_delay: 200ms
 # 0 disables
-wal_writer_flush_after: 1MB
+postgres_wal_writer_flush_after: 1MB
 # range 0-100000, in microseconds
-commit_delay: 0
+postgres_commit_delay: 0
 # range 1-1000
-commit_siblings: 5
+postgres_commit_siblings: 5
 # range 30s-1d
-checkpoint_timeout: 5min
-max_wal_size: 1GB
-min_wal_size: 80MB
+postgres_checkpoint_timeout: 5min
+postgres_max_wal_size: 1GB
+postgres_min_wal_size: 80MB
 # checkpoint target duration, 0.0 - 1.0
-checkpoint_completion_target: 0.5
+postgres_checkpoint_completion_target: 0.5
 # 0 disables
-checkpoint_flush_after: 256kB
+postgres_checkpoint_flush_after: 256kB
 # 0 disables
-checkpoint_warning: 30s
+postgres_checkpoint_warning: 30s
 # off, on, or always
 # Changing requires restart
-archive_mode: off
-archive_command: ""
+postgres_archive_mode: off
+postgres_archive_command: ""
 # number of seconds; 0 disables
-archive_timeout: 0
+postgres_archive_timeout: 0
 
 
 # Changing requires restart
-max_wal_senders: 0
+postgres_max_wal_senders: 0
 # in logfile segments, 16MB each; 0 disables
-wal_keep_segments: 0
+postgres_wal_keep_segments: 0
 # in milliseconds; 0 disables
-wal_sender_timeout: 60s
+postgres_wal_sender_timeout: 60s
 # Changing requires restart
-max_replication_slots: 0
+postgres_max_replication_slots: 0
 # Changing requires restart
-track_commit_timestamp: false
-synchronous_standby_names: []
-vacuum_defer_cleanup_age: 0
+postgres_track_commit_timestamp: false
+postgres_synchronous_standby_names: []
+postgres_vacuum_defer_cleanup_age: 0
 # Changing requires restart
-hot_standby: false
+postgres_hot_standby: false
 # -1 allows indefinite delay
-max_standby_archive_delay: 30s
+postgres_max_standby_archive_delay: 30s
 # -1 allows indefinite delay
-max_standby_streaming_delay: 30s
+postgres_max_standby_streaming_delay: 30s
 # 0 disables
-wal_receiver_status_interval: 10s
-hot_standby_feedback: false
+postgres_wal_receiver_status_interval: 10s
+postgres_hot_standby_feedback: false
 # in milliseconds; 0 disables
-wal_receiver_timeout: 60s
-wal_retrieve_retry_interval: 5s
+postgres_wal_receiver_timeout: 60s
+postgres_wal_retrieve_retry_interval: 5s
 
 
-enable_bitmapscan: true
-enable_hashagg: true
-enable_hashjoin: true
-enable_indexscan: true
-enable_indexonlyscan: true
-enable_material: true
-enable_mergejoin: true
-enable_nestloop: true
-enable_seqscan: true
-enable_sort: true
-enable_tidscan: true
-seq_page_cost: 1.0
-random_page_cost: 4.0
-cpu_tuple_cost: 0.01
-cpu_index_tuple_cost: 0.005
-cpu_operator_cost: 0.0025
-parallel_tuple_cost: 0.1
-parallel_setup_cost: 1000.0
-min_parallel_relation_size: 8MB
-effective_cache_size: 4GB
-geqo: true
-geqo_threshold: 12
+postgres_enable_bitmapscan: true
+postgres_enable_hashagg: true
+postgres_enable_hashjoin: true
+postgres_enable_indexscan: true
+postgres_enable_indexonlyscan: true
+postgres_enable_material: true
+postgres_enable_mergejoin: true
+postgres_enable_nestloop: true
+postgres_enable_seqscan: true
+postgres_enable_sort: true
+postgres_enable_tidscan: true
+postgres_seq_page_cost: 1.0
+postgres_random_page_cost: 4.0
+postgres_cpu_tuple_cost: 0.01
+postgres_cpu_index_tuple_cost: 0.005
+postgres_cpu_operator_cost: 0.0025
+postgres_parallel_tuple_cost: 0.1
+postgres_parallel_setup_cost: 1000.0
+postgres_min_parallel_relation_size: 8MB
+postgres_effective_cache_size: 4GB
+postgres_geqo: true
+postgres_geqo_threshold: 12
 # Range 1-10
-geqo_effort: 5
-geqo_pool_size: 0
-geqo_generations: 0
-geqo_selection_bias: 2.0
-geqo_seed: 0.0
+postgres_geqo_effort: 5
+postgres_geqo_pool_size: 0
+postgres_geqo_generations: 0
+postgres_geqo_selection_bias: 2.0
+postgres_geqo_seed: 0.0
 # Range 1-10000
-default_statistics_target: 100
-constraint_exclusion: partition
-cursor_tuple_fraction: 0.1
-from_collapse_limit: 8
+postgres_default_statistics_target: 100
+postgres_constraint_exclusion: partition
+postgres_cursor_tuple_fraction: 0.1
+postgres_from_collapse_limit: 8
 # 1 disables collapsing of explicit JOIN clauses
-join_collapse_limit: 8
-force_parallel_mode: false
+postgres_join_collapse_limit: 8
+postgres_force_parallel_mode: false
 
 
 # Combination of stderr, csvlog, syslog, eventlog
 # csvlog requires logging_collector
-log_destination: [ "stderr" ]
+postgres_log_destination: [ "stderr" ]
 # Changing requires restart
-logging_collector: false
+postgres_logging_collector: false
 # can include strftime() escapes
-log_filename: "postgresql-%Y-%m-%d_%H%M%S.log"
-log_file_mode: 0600
-log_truncate_on_rotation: false
+postgres_log_filename: "postgresql-%Y-%m-%d_%H%M%S.log"
+postgres_log_file_mode: 0600
+postgres_log_truncate_on_rotation: false
 # 0 disables
-log_rotation_age: 1d
+postgres_log_rotation_age: 1d
 # 0 disables
-log_rotation_size: 10MB
-syslog_facility: LOCAL0
-syslog_ident: postgres
-syslog_sequence_numbers: true
-syslog_split_messages: true
-event_source: PostgreSQL
-client_min_messages: notice
-log_min_messages: warning
-log_min_error_statement: error
+postgres_log_rotation_size: 10MB
+postgres_syslog_facility: LOCAL0
+postgres_syslog_ident: postgres
+postgres_syslog_sequence_numbers: true
+postgres_syslog_split_messages: true
+postgres_event_source: PostgreSQL
+postgres_client_min_messages: notice
+postgres_log_min_messages: warning
+postgres_log_min_error_statement: error
 # -1 is disabled, 0 logs all statements and their duration
-log_min_duration_statement: -1
-debug_print_parse: false
-debug_print_rewritten: false
-debug_print_plan: false
-debug_pretty_print: true
-log_checkpoints: false
-log_connections: false
-log_disconnections: false
-log_duration: false
+postgres_log_min_duration_statement: -1
+postgres_debug_print_parse: false
+postgres_debug_print_rewritten: false
+postgres_debug_print_plan: false
+postgres_debug_pretty_print: true
+postgres_log_checkpoints: false
+postgres_log_connections: false
+postgres_log_disconnections: false
+postgres_log_duration: false
 # terse, default or verbose
-log_error_verbosity: default
-log_hostname: false
-log_line_prefix: ''
-log_lock_waits: false
+postgres_log_error_verbosity: default
+postgres_log_hostname: false
+postgres_log_line_prefix: ''
+postgres_log_lock_waits: false
 # none, ddl, mod or all
-log_statement: none
-log_replication_commands: false
+postgres_log_statement: none
+postgres_log_replication_commands: false
 # In Kilobytes. -1 disables, 0 logs all
-log_temp_files: -1
-log_timezone: GMT
-cluster_name: ""
-update_process_title: true
+postgres_log_temp_files: -1
+postgres_log_timezone: GMT
+postgres_cluster_name: ""
+postgres_update_process_title: true
 
-track_activities: true
-track_counts: true
-track_io_timing: false
+postgres_track_activities: true
+postgres_track_counts: true
+postgres_track_io_timing: false
 # none, pl, all
-track_functions: none
+postgres_track_functions: none
 # Changing requires restart
-track_activity_query_size: 1024
-stats_temp_directory: pg_stat_tmp
-log_parser_stats: false
-log_planner_stats: false
-log_executor_stats: false
-log_statement_stats: false
+postgres_track_activity_query_size: 1024
+postgres_stats_temp_directory: pg_stat_tmp
+postgres_log_parser_stats: false
+postgres_log_planner_stats: false
+postgres_log_executor_stats: false
+postgres_log_statement_stats: false
 
 
 # requires track_counts
-autovacuum: true
+postgres_autovacuum: true
 # -1 disables, 0 logs all actions and their durations
-log_autovacuum_min_duration: -1
+postgres_log_autovacuum_min_duration: -1
 # Changing requires restart
-autovacuum_max_workers: 3
-autovacuum_naptime: 1min
-autovacuum_vacuum_threshold: 50
-autovacuum_analyze_threshold: 50
-autovacuum_vacuum_scale_factor: 0.2
-autovacuum_analyze_scale_factor: 0.1
+postgres_autovacuum_max_workers: 3
+postgres_autovacuum_naptime: 1min
+postgres_autovacuum_vacuum_threshold: 50
+postgres_autovacuum_analyze_threshold: 50
+postgres_autovacuum_vacuum_scale_factor: 0.2
+postgres_autovacuum_analyze_scale_factor: 0.1
 # Changing requires restart
-autovacuum_freeze_max_age: 200000000
+postgres_autovacuum_freeze_max_age: 200000000
 # Changing requires restart
-autovacuum_multixact_freeze_max_age: 400000000
+postgres_autovacuum_multixact_freeze_max_age: 400000000
 # -1 to use vacuum_cost_delay
-autovacuum_vacuum_cost_delay: 20ms
+postgres_autovacuum_vacuum_cost_delay: 20ms
 # -1 to use vacuum_cost_limit
-autovacuum_vacuum_cost_limit: -1
+postgres_autovacuum_vacuum_cost_limit: -1
 
 
-search_path: '"$user", public'
-default_tablespace: ""
-temp_tablespaces: ""
-check_function_bodies: true
-default_transaction_isolation: "read committed"
-default_transaction_read_only: false
-default_transaction_deferrable: false
-session_replication_role: origin
+postgres_search_path: '"$user", public'
+postgres_default_tablespace: ""
+postgres_temp_tablespaces: ""
+postgres_check_function_bodies: true
+postgres_default_transaction_isolation: "read committed"
+postgres_default_transaction_read_only: false
+postgres_default_transaction_deferrable: false
+postgres_session_replication_role: origin
 # 0 disables
-statement_timeout: 0
+postgres_statement_timeout: 0
 # 0 disables
-lock_timeout: 0
+postgres_lock_timeout: 0
 # 0 disables
-idle_in_transaction_session_timeout: 0
-vacuum_freeze_min_age: 50000000
-vacuum_freeze_table_age: 150000000
-vacuum_multixact_freeze_min_age: 5000000
-vacuum_multixact_freeze_table_age: 150000000
+postgres_idle_in_transaction_session_timeout: 0
+postgres_vacuum_freeze_min_age: 50000000
+postgres_vacuum_freeze_table_age: 150000000
+postgres_vacuum_multixact_freeze_min_age: 5000000
+postgres_vacuum_multixact_freeze_table_age: 150000000
 # hex, escape
-bytea_output: hex
-xmlbinary: base64
-xmloption: content
-gin_fuzzy_search_limit: 0
-gin_pending_list_limit: 4MB
-datestyle: "iso, mdy"
-intervalstyle: postgres
-timezone: GMT
-timezone_abbreviations: Default
+postgres_bytea_output: hex
+postgres_xmlbinary: base64
+postgres_xmloption: content
+postgres_gin_fuzzy_search_limit: 0
+postgres_gin_pending_list_limit: 4MB
+postgres_datestyle: "iso, mdy"
+postgres_intervalstyle: postgres
+postgres_timezone: GMT
+postgres_timezone_abbreviations: Default
 # Min -15, max 3
-extra_float_digits: 0
-client_encoding: sql_ascii
-lc_messages: C
-lc_monetary: C
-lc_numeric: C
-lc_time: C
-default_text_search_config: pg_catalog.simple
-dynamic_library_path: "$libdir"
-local_preload_libraries: ""
-session_preload_libraries: ""
+postgres_extra_float_digits: 0
+postgres_client_encoding: sql_ascii
+postgres_lc_messages: C
+postgres_lc_monetary: C
+postgres_lc_numeric: C
+postgres_lc_time: C
+postgres_default_text_search_config: pg_catalog.simple
+postgres_dynamic_library_path: "$libdir"
+postgres_local_preload_libraries: ""
+postgres_session_preload_libraries: ""
 
 
-deadlock_timeout: 1s
+postgres_deadlock_timeout: 1s
 # Min 10
 # Changing requires restart
-max_locks_per_transaction: 64
+postgres_max_locks_per_transaction: 64
 # Min 10
 # Changing requires restart
-max_pred_locks_per_transaction: 64
+postgres_max_pred_locks_per_transaction: 64
 
 
-array_nulls: true
-backslash_quote: safe_encoding
-default_with_oids: false
-escape_string_warning: true
-lo_compat_privileges: false
-operator_precedence_warning: false
-quote_all_identifiers: false
-sql_inheritance: true
-standard_conforming_strings: true
-synchronize_seqscans: true
-transform_null_equals: false
+postgres_array_nulls: true
+postgres_backslash_quote: safe_encoding
+postgres_default_with_oids: false
+postgres_escape_string_warning: true
+postgres_lo_compat_privileges: false
+postgres_operator_precedence_warning: false
+postgres_quote_all_identifiers: false
+postgres_sql_inheritance: true
+postgres_standard_conforming_strings: true
+postgres_synchronize_seqscans: true
+postgres_transform_null_equals: false
 
 
-exit_on_error: false
-restart_after_crash: true
+postgres_exit_on_error: false
+postgres_restart_after_crash: true

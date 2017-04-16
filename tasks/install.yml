@@ -2,6 +2,7 @@
 - name: Install pacman packages
   pacman:
     name: "{{ item }}"
+    update_cache: yes
   with_items:
     - postgresql
     - postgresql-docs
@@ -12,6 +13,7 @@
 - name: Install apt packages
   apt:
     name: "{{ item }}"
+    update_cache: yes
   with_items:
     - postgresql
     - postgresql-client

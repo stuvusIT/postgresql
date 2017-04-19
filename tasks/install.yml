@@ -1,4 +1,9 @@
 ---
+- name: Update pacman repositories cache
+  pacman:
+    update_cache: yes
+  changed_when: false
+
 - name: Install pacman packages
   pacman:
     name: "{{ item }}"
@@ -8,6 +13,11 @@
     - postgresql-old-upgrade
     - python2-psycopg2
   when: ansible_pkg_mgr == "pacman"
+
+- name: Update apt repositories cache
+  apt:
+    update_cache: yes
+  changed_when: false
 
 - name: Install apt packages
   apt:

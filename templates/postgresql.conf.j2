@@ -43,7 +43,7 @@ ssl_crl_file              = '{{ postgres_ssl_crl_file }}'
 password_encryption       = {{ postgres_password_encryption | lower }}
 db_user_namespace         = {{ postgres_db_user_namespace | lower }}
 row_security              = {{ postgres_row_security | lower }}
-{% if krb_server_keyfile != "" %}
+{% if postgres_krb_server_keyfile != "" %}
 
 # GSSAPI using kerberos
 krb_server_keyfile        = '{{ postgres_krb_server_keyfile }}'

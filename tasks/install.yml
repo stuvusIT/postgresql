@@ -3,6 +3,7 @@
   pacman:
     update_cache: yes
   changed_when: false
+  when: ansible_pkg_mgr == "pacman"
 
 - name: Install pacman packages
   pacman:
@@ -18,6 +19,7 @@
   apt:
     update_cache: yes
   changed_when: false
+  when: ansible_pkg_mgr == "apt"
 
 - name: Install apt packages
   apt:

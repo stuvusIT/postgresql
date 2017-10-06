@@ -52,7 +52,7 @@
 
 # Using sudo because become_user may be overridden
 - name: Initialize database
-  command: sudo -Hu {{ postgres_user }} initdb --locale {{ postgres_locale }} -E {{ postgres_encoding }} -D {{ postgres_data_directory }}
+  command: sudo -Hu {{ postgres_user }} {{ postgres_initdb }} --locale {{ postgres_locale }} -E {{ postgres_encoding }} -D {{ postgres_data_directory }}
   when: not postgres_version.stat.exists
 
 - name: Include Postgres config

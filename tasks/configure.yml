@@ -42,8 +42,8 @@
     mode: 0755
   with_items:
     - /etc/profile.d/postgresql.sh
-    - "{{ postgres_data_directory }}/.profile"
-    - "{{ postgres_data_directory }}/.bashrc"
+    - "/var/lib/postgresHome/.profile"
+    - "/var/lib/postgresHome/.bashrc"
 
 - name: Stat Postgres version
   stat:

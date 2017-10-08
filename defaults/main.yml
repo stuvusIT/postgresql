@@ -6,6 +6,7 @@ postgres_user: postgres
 postgres_group: postgres
 postgres_locale: C
 postgres_encoding: UTF8
+postgres_initdb: initdb
 
 ##########
 # pg_hba.conf

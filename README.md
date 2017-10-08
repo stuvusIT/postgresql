@@ -16,6 +16,9 @@ This role seriously has a ton of variables.
 Instead of copying the defaults file here, look it [up there](defaults/main.yml).
 All variables from postgresql.conf are called exactly like they are called in the file but with `postgres_` prepended.
 
+The only variable is `postgres_initdb` which defaults to `initdb`.
+It is the executable that is called when trying to initialize the PostgreSQL database.
+
 ## Dependencies
 
 None

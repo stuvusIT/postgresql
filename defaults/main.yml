@@ -6,7 +6,7 @@ postgres_user: postgres
 postgres_group: postgres
 postgres_locale: C
 postgres_encoding: UTF8
-
+postgres_home_directory: "/var/lib/postgresHome"
 ##########
 # pg_hba.conf
 ##########

@@ -43,7 +43,7 @@
     group: "{{postgres_group }}"
     uid: 88
     shell: /bin/false
-    home: /var/lib/postgresHome
+    home: "{{ postgres_home_directory }}"
     comment: "PostgreSQL user"
     createhome: false
 
@@ -65,4 +65,4 @@
   with_items:
     - "{{ postgres_data_directory }}"
     - "{{ postgres_log_directory }}"
-    - /var/lib/postgresHome
+    - "{{ postgres_home_directory }}"

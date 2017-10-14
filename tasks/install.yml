@@ -29,7 +29,14 @@
     - postgresql-client
     - postgresql-doc
     - python-psycopg2
+  register: apt
   when: ansible_pkg_mgr == "apt"
+
+- name: Stop PostgreSQL
+  service:
+    name: postgresql.service
+    state: stopped
+  when: ansible_pkg_mgr == "apt" and apt.changed
 
 - name: Ensure Postgres group exists
   group:

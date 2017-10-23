@@ -108,7 +108,6 @@ postgres_max_prepared_transactions: 0
 postgres_work_mem: 4MB
 # Minimum is 1MB
 postgres_maintenance_work_mem: 64MB
-postgres_replacement_sort_tuples: 150000
 # Minimum is 1MB; Use -1 to use the same as maintenance_work_mem
 postgres_autovacuum_work_mem: -1
 # Minimum is 100kB

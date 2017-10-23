@@ -47,7 +47,7 @@ postgres_hbas:
 ##########
 # postgresql.conf
 ##########
-postgres_unix_socket_directories: /run/postgresql
+postgres_unix_socket_directories: /run/postgres
 # Changing requires restart
 postgres_unix_socket_group: ''
 # Changing requires restart

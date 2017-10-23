@@ -79,7 +79,7 @@
 - name: Enable and start
   service:
     name: postgresql.service
-    state: running
+    state: started
     enabled: yes
   when: not unitfile.changed
 

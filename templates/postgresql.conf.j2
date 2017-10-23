@@ -68,7 +68,6 @@ temp_buffers                    = {{ postgres_temp_buffers }}
 max_prepared_transactions       = {{ postgres_max_prepared_transactions }}
 work_mem                        = {{ postgres_work_mem }}
 maintenance_work_mem            = {{ postgres_maintenance_work_mem }}
-replacement_sort_tuples         = {{ postgres_replacement_sort_tuples }}
 autovacuum_work_mem             = {{ postgres_autovacuum_work_mem }}
 max_stack_depth                 = {{ postgres_max_stack_depth }}
 dynamic_shared_memory_type      = {{ postgres_dynamic_shared_memory_type }}
@@ -95,14 +94,10 @@ vacuum_cost_limit               = {{ postgres_vacuum_cost_limit }}
 bgwriter_delay                  = {{ postgres_bgwriter_delay }}
 bgwriter_lru_maxpages           = {{ postgres_bgwriter_lru_maxpages }}
 bgwriter_lru_multiplier         = {{ postgres_bgwriter_lru_multiplier }}
-bgwriter_flush_after            = {{ postgres_bgwriter_flush_after }}
 
 # - Asynchronous Behavior -
 effective_io_concurrency        = {{ postgres_effective_io_concurrency }}
 max_worker_processes            = {{ postgres_max_worker_processes }}
-max_parallel_workers_per_gather = {{ postgres_max_parallel_workers_per_gather }}
-old_snapshot_threshold          = {{ postgres_old_snapshot_threshold }}
-backend_flush_after             = {{ postgres_backend_flush_after }}
 
 #------------------------------------------------------------------------------
 # WRITE AHEAD LOG
@@ -119,7 +114,6 @@ wal_compression              = {{ postgres_wal_compression | lower }}
 wal_log_hints                = {{ postgres_wal_log_hints | lower}}
 wal_buffers                  = {{ postgres_wal_buffers }}
 wal_writer_delay             = {{ postgres_wal_writer_delay }}
-wal_writer_flush_after       = {{ postgres_wal_writer_flush_after }}
 commit_delay                 = {{ postgres_commit_delay }}
 commit_siblings              = {{ postgres_commit_siblings }}
 
@@ -129,7 +123,6 @@ checkpoint_timeout           = {{ postgres_checkpoint_timeout }}
 max_wal_size                 = {{ postgres_max_wal_size }}
 min_wal_size                 = {{ postgres_min_wal_size }}
 checkpoint_completion_target = {{ postgres_checkpoint_completion_target }}
-checkpoint_flush_after       = {{ postgres_checkpoint_flush_after }}
 checkpoint_warning           = {{ postgres_checkpoint_warning }}
 
 # - Archiving -
@@ -190,9 +183,6 @@ random_page_cost           = {{ postgres_random_page_cost }}
 cpu_tuple_cost             = {{ postgres_cpu_tuple_cost }}
 cpu_index_tuple_cost       = {{ postgres_cpu_index_tuple_cost }}
 cpu_operator_cost          = {{ postgres_cpu_operator_cost }}
-parallel_tuple_cost        = {{ postgres_parallel_tuple_cost }}
-parallel_setup_cost        = {{ postgres_parallel_setup_cost }}
-min_parallel_relation_size = {{ postgres_min_parallel_relation_size }}
 effective_cache_size       = {{ postgres_effective_cache_size }}
 
 # - Genetic Query Optimizer -
@@ -212,7 +202,6 @@ constraint_exclusion       = {{ postgres_constraint_exclusion }}
 cursor_tuple_fraction      = {{ postgres_cursor_tuple_fraction }}
 from_collapse_limit        = {{ postgres_from_collapse_limit }}
 join_collapse_limit        = {{ postgres_join_collapse_limit }}
-force_parallel_mode        = {{ postgres_force_parallel_mode | lower }}
 
 #------------------------------------------------------------------------------
 # ERROR REPORTING AND LOGGING
@@ -230,8 +219,6 @@ log_rotation_age           = '{{ postgres_log_rotation_age }}'
 log_rotation_size          = '{{ postgres_log_rotation_size }}'
 syslog_facility            = '{{ postgres_syslog_facility }}'
 syslog_ident               = '{{ postgres_syslog_ident }}'
-syslog_sequence_numbers    = {{ postgres_syslog_sequence_numbers | lower }}
-syslog_split_messages      = {{ postgres_syslog_split_messages | lower }}
 event_source               = '{{ postgres_event_source }}'
 
 # - When to Log -
@@ -318,7 +305,6 @@ default_transaction_deferrable      = {{ postgres_default_transaction_deferrable
 session_replication_role            = '{{ postgres_session_replication_role }}'
 statement_timeout                   = {{ postgres_statement_timeout }}
 lock_timeout                        = {{ postgres_lock_timeout }}
-idle_in_transaction_session_timeout = {{ postgres_idle_in_transaction_session_timeout }}
 vacuum_freeze_min_age               = {{ postgres_vacuum_freeze_min_age }}
 vacuum_freeze_table_age             = {{ postgres_vacuum_freeze_table_age }}
 vacuum_multixact_freeze_min_age     = {{ postgres_vacuum_multixact_freeze_min_age }}
@@ -384,4 +370,3 @@ transform_null_equals       = {{ postgres_transform_null_equals | lower }}
 
 exit_on_error       = {{ postgres_exit_on_error }}
 restart_after_crash = {{ postgres_restart_after_crash }}
-

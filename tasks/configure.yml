@@ -31,7 +31,7 @@
     dest: "/etc/pg_service.conf"
     mode: 0644
     owner: root
-    group: "root"
+    group: root
 
 - name: Tell psql to use correct socket location
   template:
@@ -79,7 +79,7 @@
 - name: Enable and start
   service:
     name: postgresql.service
-    state: running
+    state: started
     enabled: yes
   when: not unitfile.changed
 

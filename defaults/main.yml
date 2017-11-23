@@ -7,6 +7,7 @@ postgres_group: postgres
 postgres_locale: C
 postgres_encoding: UTF8
 postgres_home_directory: "/var/lib/postgresHome"
+postgres_run_directory: /var/run/postgresql
 postgres_initdb: initdb
 postgres_pg_ctl: /usr/bin/pg_ctl
 ##########
@@ -107,7 +108,6 @@ postgres_max_prepared_transactions: 0
 postgres_work_mem: 4MB
 # Minimum is 1MB
 postgres_maintenance_work_mem: 64MB
-postgres_replacement_sort_tuples: 150000
 # Minimum is 1MB; Use -1 to use the same as maintenance_work_mem
 postgres_autovacuum_work_mem: -1
 # Minimum is 100kB
@@ -136,19 +136,10 @@ postgres_bgwriter_delay: 200ms
 postgres_bgwriter_lru_maxpages: 100
 # 0-10.0 multiplier on buffers scanned/round
 postgres_bgwriter_lru_multiplier: 2.0
-# 0 disables
-postgres_bgwriter_flush_after: 512kB
 # 1-1000; 0 disables prefetching
 postgres_effective_io_concurrency: 1
 # Changing requires restart
 postgres_max_worker_processes: 8
-# Taken from max_worker_processes
-postgres_max_parallel_workers_per_gather: 0
-# 1min-60d; -1 disables; 0 is immediate
-# Changing requires restart
-postgres_old_snapshot_threshold: -1
-# 0 disables
-postgres_backend_flush_after: 0
 
 
 # minimal, replica, or logical
@@ -168,8 +159,6 @@ postgres_wal_log_hints: false
 postgres_wal_buffers: -1
 # 1-10000 milliseconds
 postgres_wal_writer_delay: 200ms
-# 0 disables
-postgres_wal_writer_flush_after: 1MB
 # range 0-100000, in microseconds
 postgres_commit_delay: 0
 # range 1-1000
@@ -180,8 +169,6 @@ postgres_max_wal_size: 1GB
 postgres_min_wal_size: 80MB
 # checkpoint target duration, 0.0 - 1.0
 postgres_checkpoint_completion_target: 0.5
-# 0 disables
-postgres_checkpoint_flush_after: 256kB
 # 0 disables
 postgres_checkpoint_warning: 30s
 # off, on, or always
@@ -234,9 +221,6 @@ postgres_random_page_cost: 4.0
 postgres_cpu_tuple_cost: 0.01
 postgres_cpu_index_tuple_cost: 0.005
 postgres_cpu_operator_cost: 0.0025
-postgres_parallel_tuple_cost: 0.1
-postgres_parallel_setup_cost: 1000.0
-postgres_min_parallel_relation_size: 8MB
 postgres_effective_cache_size: 4GB
 postgres_geqo: true
 postgres_geqo_threshold: 12
@@ -253,7 +237,6 @@ postgres_cursor_tuple_fraction: 0.1
 postgres_from_collapse_limit: 8
 # 1 disables collapsing of explicit JOIN clauses
 postgres_join_collapse_limit: 8
-postgres_force_parallel_mode: false
 
 
 # Combination of stderr, csvlog, syslog, eventlog
@@ -271,8 +254,6 @@ postgres_log_rotation_age: 1d
 postgres_log_rotation_size: 10MB
 postgres_syslog_facility: LOCAL0
 postgres_syslog_ident: postgres
-postgres_syslog_sequence_numbers: true
-postgres_syslog_split_messages: true
 postgres_event_source: PostgreSQL
 postgres_client_min_messages: notice
 postgres_log_min_messages: warning
@@ -349,7 +330,6 @@ postgres_statement_timeout: 0
 # 0 disables
 postgres_lock_timeout: 0
 # 0 disables
-postgres_idle_in_transaction_session_timeout: 0
 postgres_vacuum_freeze_min_age: 50000000
 postgres_vacuum_freeze_table_age: 150000000
 postgres_vacuum_multixact_freeze_min_age: 5000000

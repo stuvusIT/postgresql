@@ -1,7 +1,6 @@
 ---
 postgres_data_directory: /var/lib/postgres
 postgres_conf_directory: /etc/postgres
-postgres_run_directory: /run/postgres
 postgres_log_directory: /var/log/postgres
 
 postgres_hba_file: "{{ postgres_conf_directory }}/pg_hba.conf"

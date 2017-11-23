@@ -41,18 +41,17 @@
 - name: Ensure Postgres group exists
   group:
     name: "{{ postgres_group }}"
-    gid: 88
     system: true
 
 - name: Ensure Postgres user exists
   user:
     name: "{{ postgres_user }}"
     group: "{{postgres_group }}"
-    uid: 88
     shell: /bin/false
     home: "{{ postgres_home_directory }}"
     comment: "PostgreSQL user"
     createhome: false
+    system: true
 
 - name: Create configuration directory
   file:

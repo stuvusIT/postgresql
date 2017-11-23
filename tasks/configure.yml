@@ -31,7 +31,7 @@
     dest: "/etc/pg_service.conf"
     mode: 0644
     owner: root
-    group: "root"
+    group: root
 
 - name: Tell psql to use correct socket location
   template:

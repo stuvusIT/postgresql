@@ -38,6 +38,31 @@
     state: stopped
   when: ansible_pkg_mgr == "apt" and apt.changed
 
+- name: Get postgresql version
+  shell: "dpkg-query --showformat='${Version}' --show postgresql | cut -d'+' -f1"
+  changed_when: false
+  register: pg_ver
+  when: ansible_pkg_mgr == "apt"
+
+- name: Delete default postgres unit
+  file:
+    path: /lib/systemd/system/postgresql@.service
+    state: absent
+  register: del_unit
+  when: ansible_pkg_mgr == "apt"
+
+- name: Stop default postgres unit
+  service:
+    name: postgresql@{{ pg_ver.stdout }}.service
+    state: stopped
+    enabled: false
+  when: ansible_pkg_mgr == "apt" and del_unit.changed
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: true
+  when: del_unit.changed
+
 - name: Ensure Postgres group exists
   group:
     name: "{{ postgres_group }}"
@@ -72,3 +97,15 @@
     - "{{ postgres_data_directory }}"
     - "{{ postgres_log_directory }}"
     - "{{ postgres_home_directory }}"
+
+- name: Set path to postgres utilities
+  set_fact:
+    "{{ item.name }}": "{% if pg_ver.stdout %}/usr/lib/postgresql/{{ pg_ver.stdout }}/bin/{{ item.value }}{% else %}{{ item.default }}{% endif %}"
+  when: "{{ item.name }} is not defined"
+  with_items:
+    - name: postgres_initdb
+      value: initdb
+      default: postgres_default_initdb
+    - name: postgres_pg_ctl
+      value: pg_ctl
+      default: postgres_default_pg_ctl

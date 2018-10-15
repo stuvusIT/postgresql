@@ -8,7 +8,7 @@ This is accomplished by moving configuration to /etc, logs to /var/log, and the 
 
 ## Requirements
 
-A dpkg- or pacman-based Linux distribution.
+Debian or Ubuntu
 
 ## Role Variables
 

@@ -14,11 +14,7 @@ galaxy_info:
     - yakkety
   - name: Debian
     versions:
-    - wheezy
-  - name: ArchLinux
-    versions:
-    - all
-    - any
+    - stretch
 
   galaxy_tags:
     - postgres

@@ -1,26 +1,4 @@
 ---
-- name: Update pacman repositories cache
-  pacman:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "pacman"
-
-- name: Install pacman packages
-  pacman:
-    name: "{{ item }}"
-  with_items:
-    - postgresql
-    - postgresql-docs
-    - postgresql-old-upgrade
-    - python2-psycopg2
-  when: ansible_pkg_mgr == "pacman"
-
-- name: Update apt repositories cache
-  apt:
-    update_cache: yes
-  changed_when: false
-  when: ansible_pkg_mgr == "apt"
-
 - name: Install apt packages
   apt:
     name: "{{ item }}"
@@ -30,33 +8,30 @@
     - postgresql-doc
     - python-psycopg2
   register: apt
-  when: ansible_pkg_mgr == "apt"
 
 - name: Stop PostgreSQL
   service:
     name: postgresql.service
     state: stopped
-  when: ansible_pkg_mgr == "apt" and apt.changed
+  when: apt.changed
 
 - name: Get postgresql version
   shell: "dpkg-query --showformat='${Version}' --show postgresql | cut -d'+' -f1"
   changed_when: false
   register: pg_ver
-  when: ansible_pkg_mgr == "apt"
 
 - name: Delete default postgres unit
   file:
     path: /lib/systemd/system/postgresql@.service
     state: absent
   register: del_unit
-  when: ansible_pkg_mgr == "apt"
 
 - name: Stop default postgres unit
   service:
     name: "postgresql@{{ pg_ver.stdout }}{% if ansible_distribution == 'Debian' %}-main{% endif %}.service"
     state: stopped
     enabled: false
-  when: ansible_pkg_mgr == "apt" and del_unit.changed
+  when: del_unit.changed
 
 - name: Reload systemd
   systemd:

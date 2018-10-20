@@ -61,7 +61,7 @@
     owner: root
     group: postgres
 
-- name: Create directoreies
+- name: Create directories
   file:
     path: "{{ item }}"
     state: directory
@@ -76,7 +76,7 @@
 - name: Set path to postgres utilities
   set_fact:
     "{{ item.name }}": "{% if pg_ver.stdout %}/usr/lib/postgresql/{{ pg_ver.stdout }}/bin/{{ item.value }}{% else %}{{ item.default }}{% endif %}"
-  when: "{{ item.name }} is not defined"
+  when: item.name is not defined
   with_items:
     - name: postgres_initdb
       value: initdb

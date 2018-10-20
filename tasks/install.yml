@@ -81,6 +81,3 @@
     - name: postgres_initdb
       value: initdb
       default: postgres_default_initdb
-    - name: postgres_pg_ctl
-      value: pg_ctl
-      default: postgres_default_pg_ctl

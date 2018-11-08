@@ -9,7 +9,6 @@ postgres_encoding: UTF8
 postgres_home_directory: "/var/lib/postgresHome"
 postgres_run_directory: /var/run/postgresql
 postgres_default_initdb: initdb
-postgres_default_pg_ctl: /usr/bin/pg_ctl
 ##########
 # pg_hba.conf
 ##########

@@ -1,12 +1,11 @@
 ---
 - name: Install apt packages
   apt:
-    name: "{{ item }}"
-  with_items:
-    - postgresql
-    - postgresql-client
-    - postgresql-doc
-    - python-psycopg2
+    name:
+      - postgresql
+      - postgresql-client
+      - postgresql-doc
+      - python-psycopg2
   register: apt
 
 - name: Stop PostgreSQL

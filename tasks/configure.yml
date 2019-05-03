@@ -91,3 +91,16 @@
     state: restarted
     enabled: yes
   when: unitfile.changed
+
+- name: Ensure configured databases exist
+  postgresql_db:
+    name: "{{ item }}"
+  loop: "{{ postgresql_ensure_databases }}"
+
+- name: Ensure configured roles exist
+  postgresql_user:
+    name: "{{ item.key }}"
+    password: "{{ item.value['password'] | default(omit) }}"
+    priv: "{{ item.value['privileges'] | default(omit) }}"
+  no_log: true
+  loop: "{{ postgresql_ensure_roles | dict2items }}"

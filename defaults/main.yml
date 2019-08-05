@@ -374,7 +374,6 @@ postgres_escape_string_warning: true
 postgres_lo_compat_privileges: false
 postgres_operator_precedence_warning: false
 postgres_quote_all_identifiers: false
-postgres_sql_inheritance: true
 postgres_standard_conforming_strings: true
 postgres_synchronize_seqscans: true
 postgres_transform_null_equals: false

@@ -8,7 +8,6 @@ Type=forking
 ExecStart={{ pg_ctl_path }} -s -D {{ postgres_data_directory }} start -w -t 120
 ExecReload={{ pg_ctl_path }} -s -D {{ postgres_data_directory }} reload
 ExecStop={{ pg_ctl_path }} -s -D {{ postgres_data_directory }} stop -m fast
-PIDFile={{ postgres_run_directory }}/postmaster.pid
 SyslogIdentifier=postgres
 # Security
 User={{ postgres_user }}

@@ -70,6 +70,7 @@
     mode: 0644
     owner: root
     group: root
+    validate: systemd-analyze verify %s
   register: unitfile
   vars:
     pg_ctl_path: "/usr/lib/postgresql/{{ pg_ver.stdout }}/bin/pg_ctl"

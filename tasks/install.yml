@@ -33,6 +33,12 @@
     enabled: false
   when: del_unit.changed
 
+- name: Reset failed state of default postgres unit
+  shell: "systemctl reset-failed postgresql@{{ pg_ver.stdout }}{% if ansible_distribution == 'Debian' %}-main{% endif %}.service"
+  ignore_errors: yes
+  changed_when: False
+  when: del_unit.changed
+
 - name: Reload systemd
   systemd:
     daemon_reload: true

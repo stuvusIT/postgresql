@@ -95,7 +95,7 @@
 - name: Ensure configured databases exist
   postgresql_db:
     name: "{{ item }}"
-  loop: "{{ postgresql_ensure_databases }}"
+  loop: "{{ postgres_ensure_databases }}"
 
 - name: Ensure configured roles exist
   postgresql_user:
@@ -103,4 +103,4 @@
     password: "{{ item.value['password'] | default(omit) }}"
     priv: "{{ item.value['privileges'] | default(omit) }}"
   no_log: true
-  loop: "{{ postgresql_ensure_roles | dict2items }}"
+  loop: "{{ postgres_ensure_roles | dict2items }}"

@@ -9,8 +9,8 @@ postgres_encoding: UTF8
 postgres_home_directory: "/var/lib/postgresHome"
 postgres_run_directory: /var/run/postgresql
 postgres_default_initdb: initdb
-postgresql_ensure_databases: []
-postgresql_ensure_roles: {}
+postgres_ensure_databases: []
+postgres_ensure_roles: {}
 ##########
 # pg_hba.conf
 ##########

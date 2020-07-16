@@ -52,7 +52,7 @@
 - name: Ensure Postgres user exists
   user:
     name: "{{ postgres_user }}"
-    group: "{{postgres_group }}"
+    group: "{{ postgres_group }}"
     shell: /bin/false
     home: "{{ postgres_home_directory }}"
     comment: "PostgreSQL user"

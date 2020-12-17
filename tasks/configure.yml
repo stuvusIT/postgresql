@@ -92,15 +92,11 @@
     enabled: yes
   when: unitfile.changed
 
-- name: Ensure configured databases exist
-  postgresql_db:
-    name: "{{ item }}"
-  loop: "{{ postgres_ensure_databases }}"
+- name: Ensure users exist
+  community.general.postgresql_user: "{{ item }}"
+  no_log: true # Because otherwise password might get logged.
+  loop: "{{ postgres_users }}"
 
-- name: Ensure configured roles exist
-  postgresql_user:
-    name: "{{ item.key }}"
-    password: "{{ item.value['password'] | default(omit) }}"
-    priv: "{{ item.value['privileges'] | default(omit) }}"
-  no_log: true
-  loop: "{{ postgres_ensure_roles | dict2items }}"
+- name: Ensure databases exist
+  community.general.postgresql_db: "{{ item }}"
+  loop: "{{ postgres_dbs }}"

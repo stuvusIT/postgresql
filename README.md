@@ -8,7 +8,7 @@ This is accomplished by moving configuration to /etc, logs to /var/log, and the 
 
 ## Requirements
 
-Debian or Ubuntu
+Debian 11 (Bullseye)
 
 ## Role Variables
 
